@@ -3,6 +3,7 @@
 // Roda em Node serverless (Vercel). Sem dependencias externas.
 
 const https = require('node:https')
+const tls = require('node:tls')
 const fs = require('node:fs')
 const path = require('node:path')
 const os = require('node:os')
@@ -59,10 +60,17 @@ function getAgent() {
   const key = loadMaterial('BASSPAGO_KEY', 'BASSPAGO_KEY_B64', 'BASSPAGO_230.key')
   const ca = loadMaterial('BASSPAGO_CA', 'BASSPAGO_CA_B64', 'onz_ca.pem')
 
+  // IMPORTANTE: a opcao "ca" do Node SUBSTITUI a lista padrao de CAs
+  // publicas (nao soma a ela). Como onz_ca.pem normalmente e a CA usada
+  // para validar o certificado mTLS do cliente (nao necessariamente a CA
+  // que emitiu o certificado TLS do servidor da BassPago), precisamos
+  // somar as CAs publicas padrao do Node + a CA customizada. Sem isso, a
+  // verificacao do certificado do proprio servidor falha com
+  // "unable to get local issuer certificate".
   const options = {
     cert: cert,
     key: key,
-    ca: ca,
+    ca: tls.rootCertificates.concat([ca]),
     keepAlive: true,
     rejectUnauthorized: true,
   }
