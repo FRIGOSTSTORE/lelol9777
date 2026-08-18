@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+    <script>
+        window.pixelId = "699052447f0cf151dff45c39";
+        var a = document.createElement("script");
+        a.setAttribute("async", "");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+        document.head.appendChild(a);
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>L'Oréal Paris | Luxury Privileges</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --purple-deep: #050208;
+            --purple-glow: #2D0A4E;
+            --accent: #B56BFF;
+            --glass: rgba(255, 255, 255, 0.04);
+            --success-esmerald: #00FF88;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--purple-deep);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        .universe {
+            position: fixed; inset: 0; z-index: -1;
+            background: radial-gradient(circle at 90% 10%, var(--purple-glow) 0%, transparent 40%);
+        }
+
+        header {
+            padding: 40px 20px 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .brand-name {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            letter-spacing: 12px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.25);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stepper-wrap { margin-bottom: 15px; text-align: center; }
+        .step-pill {
+            display: inline-block;
+            padding: 5px 14px;
+            background: rgba(181, 107, 255, 0.1);
+            border: 1px solid rgba(181, 107, 255, 0.3);
+            border-radius: 100px;
+            font-size: 9px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .sub-copy {
+            font-size: 13px;
+            text-align: center;
+            opacity: 0.5;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .benefits-list { display: grid; gap: 12px; }
+
+        .benefit-item {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .icon-box {
+            width: 46px; height: 46px;
+            background: rgba(181, 107, 255, 0.1);
+            border: 1px solid rgba(181, 107, 255, 0.2);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent);
+        }
+
+        .benefit-text b { 
+            display: block; 
+            font-size: 13px; 
+            text-transform: uppercase; 
+            color: var(--white); 
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+        .benefit-text p { font-size: 11px; opacity: 0.4; line-height: 1.4; }
+
+        .live-location {
+            margin: 25px 0 15px;
+            padding: 12px;
+            border-radius: 15px;
+            background: rgba(0, 255, 136, 0.03);
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        .live-location span { font-size: 11px; color: var(--success-esmerald); font-weight: 600; text-transform: uppercase; }
+        .pulse-core { width: 7px; height: 7px; background: var(--success-esmerald); border-radius: 50%; position: relative; }
+        .pulse-ring { position: absolute; width: 100%; height: 100%; background: var(--success-esmerald); border-radius: 50%; animation: ringEffect 2s infinite; }
+
+        @keyframes ringEffect { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3); opacity: 0; } }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 22px;
+            background: var(--white);
+            color: #000;
+            border: none;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* ========= ESTILOS DO POP-UP PROFISSIONAL ========= */
+        #magic-overlay {
+            position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px; text-align: center; opacity: 0; transition: opacity 0.5s ease;
+        }
+
+        .magic-card {
+            position: relative; z-index: 10;
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 35px; padding: 50px 30px;
+            box-shadow: 0 0 60px rgba(0,0,0,0.8);
+            max-width: 380px; width: 100%;
+            animation: magicPop 0.5s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+        }
+
+        .close-popup {
+            position: absolute; top: 20px; right: 20px;
+            background: none; border: none; color: rgba(255,255,255,0.3);
+            cursor: pointer; padding: 5px;
+        }
+
+        @keyframes magicPop { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        .magic-icon-svg { margin-bottom: 25px; color: var(--accent); display: flex; justify-content: center; }
+
+        .magic-title { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 4px; margin-bottom: 15px; color: var(--white); }
+        .magic-text { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 30px; }
+
+        .magic-btn {
+            width: 100%;
+            background: var(--white); color: #000;
+            padding: 20px; border-radius: 12px;
+            border: none; font-weight: 800; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 3px;
+            cursor: pointer; transition: 0.3s;
+        }
+
+        footer { padding: 30px 20px; text-align: center; font-size: 8px; opacity: 0.2; letter-spacing: 2px; }
+
+        @media (max-height: 740px) {
+            header { padding: 30px 20px 15px; }
+            h1 { font-size: 24px; }
+            .sub-copy { margin-bottom: 15px; }
+            .benefit-item { padding: 12px; gap: 12px; }
+            .btn-confirm { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="universe"></div>
+    <header><div class="brand-name">L’ORÉAL</div></header>
+
+    <main class="container">
+        <div class="stepper-wrap"><div class="step-pill">Passo 02 • Benefícios</div></div>
+
+        <h1>Privilégios da sua <br>qualificação.</h1>
+        <p class="sub-copy">Perfil elegível para o resgate de itens exclusivos da linha 2026.</p>
+
+        <div class="benefits-list">
+            <div class="benefit-item">
+                <div class="icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2h6M12 2v20M5 9c0-1.5 1.5-3 3-3h8c1.5 0 3 1.5 3 3v10c0 1.5-1.5 3-3 3H8c-1.5 0-3-1.5-3-3V9Z"/><path d="M9 13h6M9 17h6"/></svg>
+                </div>
+                <div class="benefit-text">
+                    <b>Kit Plástica Capilar</b>
+                    <p>Tratamento profissional de reestruturação.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H4v12h16v-4M4 8l3-4h10l3 4M4 8h16"/><circle cx="12" cy="14" r="2"/></svg>
+                </div>
+                <div class="benefit-text">
+                    <b>Acessório Boutique</b>
+                    <p>Necessaire de edição limitada 2026.</p>
+                </div>
+            </div>
+
+            <div class="benefit-item">
+                <div class="icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                </div>
+                <div class="benefit-text">
+                    <b>Bônus de Diagnóstico</b>
+                    <p>Item surpresa baseado na análise do fio.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="live-location">
+            <div class="pulse-core"><div class="pulse-ring"></div></div>
+            <span id="location-text">Detectando rede local...</span>
+        </div>
+
+        <button class="btn-confirm" onclick="nextPage()">Iniciar Diagnóstico</button>
+    </main>
+
+    <div id="magic-overlay">
+        <div class="magic-card">
+            <button class="close-popup" onclick="closePopup()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div class="magic-icon-svg">
+                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h2 class="magic-title">Acesso Prioritário</h2>
+            <p class="magic-text">
+                Identificamos que você possui pouco tempo disponível.<br><br>
+                Como sua qualificação já foi aprovada, <b>liberamos o acesso direto ao Quiz de Diagnóstico.</b><br><br>
+                Responda em 5 minutos e resgate seu kit. Se você sair agora, seu <b>resgate gratuito será cancelado</b> permanentemente.
+            </p>
+            <button class="magic-btn" onclick="nextPage()">Pular para o Quiz</button>
+        </div>
+    </div>
+
+    <footer>© 2026 L’Oréal Paris</footer>
+
+    <script>
+        // Lógica de Intercepção de Saída "Infinita"
+        (function() {
+            function setupTrap() {
+                history.pushState({ trap: true }, "", window.location.href);
+            }
+            setupTrap();
+            window.onpopstate = function() {
+                const overlay = document.getElementById('magic-overlay');
+                overlay.style.display = 'flex';
+                setTimeout(() => overlay.style.opacity = '1', 10);
+                setupTrap(); // Reativa o bloqueio imediatamente
+            };
+        })();
+
+        function closePopup() {
+            const overlay = document.getElementById('magic-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => { overlay.style.display = 'none'; }, 500);
+        }
+
+        function nextPage() {
+            const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
+            audio.play().catch(() => {});
+            
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+                const utm = window.location.search || '';
+                window.location.href = 'index(2).html' + utm;
+            }, 500);
+        }
+
+        async function fetchLocation() {
+            const el = document.getElementById('location-text');
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                if(data.city) {
+                    const kits = Math.floor(Math.random() * (16 - 11 + 1)) + 11;
+                    el.innerHTML = `<b>${kits} kits</b> em ${data.city}`;
+                } else { el.innerText = "Lote disponível para sua região"; }
+            } catch (e) { el.innerText = "Lote disponível para sua região"; }
+        }
+        fetchLocation();
+    </script>
+</body>
+</html>

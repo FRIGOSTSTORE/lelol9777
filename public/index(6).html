@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+    <script>
+        window.pixelId = "699052447f0cf151dff45c39";
+        var a = document.createElement("script");
+        a.setAttribute("async", "");
+        a.setAttribute("defer", "");
+        a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+        document.head.appendChild(a);
+    </script>
+    <script>
+        const link = 'back/1';
+        function setBackRedirect(url) {
+            let urlBackRedirect = url.trim() + (url.indexOf('?') > 0 ? '&' : '?') + document.location.search.replace('?', '').toString();
+            history.pushState({}, '', location.href);
+            history.pushState({}, '', location.href);
+            window.addEventListener('popstate', () => {
+                setTimeout(() => { location.href = urlBackRedirect; }, 1);
+            });
+        }
+        setBackRedirect(link);
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>L'Oréal Paris | Exclusive Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --deep-purple: #1A082E;
+            --royal-purple: #2D0A4E;
+            --success: #00FF88;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--deep-purple);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .bg-vibe {
+            position: fixed; inset: 0; z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #2D0A4E 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #4B1679 0%, transparent 40%);
+            filter: blur(80px);
+            animation: vibeMove 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes vibeMove {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        header { padding: 50px 20px 20px; text-align: center; }
+        .brand {
+            font-family: 'Cinzel', serif; font-size: 34px; letter-spacing: 12px;
+            color: var(--white); text-shadow: 0 0 25px rgba(255,255,255,0.25);
+            margin-bottom: 8px;
+        }
+        .sub-brand { font-size: 11px; letter-spacing: 4px; color: var(--white); text-transform: uppercase; opacity: 0.8; }
+
+        .progress-box { width: 100%; max-width: 400px; margin: 20px auto 40px; padding: 0 40px; }
+        .p-bar { height: 1px; width: 100%; background: rgba(255,255,255,0.1); position: relative; }
+        .p-fill { position: absolute; left: 0; top: 0; height: 100%; width: 85%; background: var(--white); box-shadow: 0 0 20px rgba(255,255,255,0.6); }
+
+        .stage { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .card {
+            background: var(--glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--border-glass); border-radius: 40px; padding: 50px 35px;
+            width: 100%; max-width: 500px; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 400; line-height: 1.4; margin-bottom: 15px; font-style: italic; }
+        .desc { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 40px; }
+
+        .btn-stack { display: grid; gap: 18px; }
+        .btn-opt {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08);
+            padding: 22px 28px; border-radius: 20px; cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .btn-opt:hover { background: rgba(255,255,255,0.07); border-color: var(--white); transform: scale(1.02); }
+        .btn-opt.active { border-color: var(--success); background: rgba(0, 255, 136, 0.05); color: var(--success); }
+        .dot { width: 100px; height: 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; width: 10px; }
+        .btn-opt.active .dot { background: var(--success); border-color: var(--success); box-shadow: 0 0 10px var(--success); }
+
+        /* TELA DE CARREGAMENTO LUXO */
+        #loading-screen {
+            position: fixed; inset: 0; z-index: 9999;
+            background: radial-gradient(circle at center, #2D0A4E 0%, #050208 100%);
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.8s ease;
+        }
+        .loader-vibe { position: relative; width: 80px; height: 80px; margin-bottom: 30px; }
+        .loader-circle {
+            position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0.1);
+            border-top: 2px solid var(--white); border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 12px; }
+        .loading-subtext { font-size: 11px; opacity: 0.4; letter-spacing: 2px; text-align: center; max-width: 280px; line-height: 1.6; }
+
+        footer { padding: 40px 20px; text-align: center; font-size: 9px; letter-spacing: 3px; opacity: 0.6; text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.05); }
+        .out { opacity: 0; transform: translateY(-20px) scale(0.95); pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-vibe"></div>
+
+    <div id="loading-screen">
+        <div class="loader-vibe"><div class="loader-circle"></div></div>
+        <div class="loading-text">Sincronizando</div>
+        <div class="loading-subtext">Enviando respostas ao sistema...</div>
+    </div>
+
+    <audio id="sfx-confirm" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <header>
+        <div class="brand">L’ORÉAL</div>
+        <div class="sub-brand">Quiz Loreal 2026</div>
+    </header>
+
+    <div class="progress-box">
+        <div class="p-bar"><div class="p-fill"></div></div>
+    </div>
+
+    <div class="stage">
+        <div class="card" id="quiz-card">
+            <h2>Como a tecnologia L'Oréal Paris pode elevar sua experiência de beleza?</h2>
+            <p class="desc">Buscamos o equilíbrio entre ciência avançada e o resultado sensorial impecável para seus fios.</p>
+
+            <div class="btn-stack">
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Elevando a segurança e saúde da fibra capilar</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Garantindo brilho e maciez extrema em rituais diários</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Oferecendo mais densidade, estilo e personalidade</span>
+                    <div class="dot"></div>
+                </div>
+                <div class="btn-opt" onclick="select(this)">
+                    <span>Protocolo completo: Saúde, Proteção e Estética Profissional</span>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 L’Oréal Paris Todos os Direitos Reservados.
+    </footer>
+
+    <script>
+        function select(el) {
+            const audio = document.getElementById('sfx-confirm');
+            audio.currentTime = 0;
+            audio.play().catch(e => {});
+
+            const options = document.querySelectorAll('.btn-opt');
+            options.forEach(opt => { if(opt !== el) opt.style.opacity = '0.1'; });
+
+            el.classList.add('active');
+
+            setTimeout(() => {
+                // Esconde o quiz
+                document.getElementById('quiz-card').classList.add('out');
+                
+                // Ativa tela roxa de carregamento
+                const loader = document.getElementById('loading-screen');
+                loader.style.display = 'flex';
+                setTimeout(() => { loader.style.opacity = '1'; }, 50);
+
+                // Aguarda 4 segundos antes de redirecionar
+                setTimeout(() => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    window.location.href = 'index(7).html?' + urlParams.toString();
+                }, 4000);
+                
+            }, 500);
+        }
+    </script>
+</body>
+</html>

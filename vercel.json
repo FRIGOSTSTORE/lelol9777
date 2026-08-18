@@ -1,0 +1,179 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/generate_pix.js": {
+      "includeFiles": "api/_certs/**",
+      "maxDuration": 30
+    },
+    "api/check_payment.js": {
+      "includeFiles": "api/_certs/**",
+      "maxDuration": 30
+    },
+    "api/webhook.js": {
+      "includeFiles": "api/_certs/**",
+      "maxDuration": 30
+    },
+    "api/configurar_webhook.js": {
+      "includeFiles": "api/_certs/**",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/elseve/checkout/produto1",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto1",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/produto2",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto2",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/produto3",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto3",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/produto4",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto4",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/produto5",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto5",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/produto6",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto6",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/produto7",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto7",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/produto8",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/produto8",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/checkout.php",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/elseve/checkout/checkout.php",
+      "destination": "/checkout/index.html"
+    },
+    {
+      "source": "/checkout/api/generate_pix.php",
+      "destination": "/api/generate_pix"
+    },
+    {
+      "source": "/checkout/api/check_payment.php",
+      "destination": "/api/check_payment"
+    },
+    {
+      "source": "/checkout/api/webhook.php",
+      "destination": "/api/webhook"
+    },
+    {
+      "source": "/elseve/checkout/api/generate_pix.php",
+      "destination": "/api/generate_pix"
+    },
+    {
+      "source": "/elseve/checkout/api/check_payment.php",
+      "destination": "/api/check_payment"
+    },
+    {
+      "source": "/elseve/checkout/api/webhook.php",
+      "destination": "/api/webhook"
+    },
+    {
+      "source": "/img/wTNMvKf4-Chat-GPT-Image-11-de-fev-de-2026-10-16-51.png",
+      "destination": "https://i.postimg.cc/wTNMvKf4/Chat-GPT-Image-11-de-fev-de-2026-10-16-51.png"
+    },
+    {
+      "source": "/img/mtfrnvpy-shopping-removebg-preview.png",
+      "destination": "https://i.postimg.cc/mtfrnvpy/shopping-removebg-preview.png"
+    },
+    {
+      "source": "/img/Cxk58Kd9-shopping-1-removebg-preview.png",
+      "destination": "https://i.postimg.cc/Cxk58Kd9/shopping-1-removebg-preview.png"
+    },
+    {
+      "source": "/img/0QT2rRPJ-creme-para-pentear-elseve-liso-dos-sonhos-250ml-97671-1-12a35ca16ba0e77b6820a21273691568-removebg-pr.png",
+      "destination": "https://i.postimg.cc/0QT2rRPJ/creme-para-pentear-elseve-liso-dos-sonhos-250ml-97671-1-12a35ca16ba0e77b6820a21273691568-removebg-pr.png"
+    },
+    {
+      "source": "/img/D08SJwDN-274207-1200-900-removebg-preview.png",
+      "destination": "https://i.postimg.cc/D08SJwDN/274207-1200-900-removebg-preview.png"
+    },
+    {
+      "source": "/img/DyNqctPZ-D-Q-NP-668012-MLB103937527202-012026-F-removebg-preview.png",
+      "destination": "https://i.postimg.cc/DyNqctPZ/D-Q-NP-668012-MLB103937527202-012026-F-removebg-preview.png"
+    },
+    {
+      "source": "/img/mgf2TGVC-shopping-2-removebg-preview.png",
+      "destination": "https://i.postimg.cc/mgf2TGVC/shopping-2-removebg-preview.png"
+    },
+    {
+      "source": "/img/65V88g19-banner1.png",
+      "destination": "https://i.postimg.cc/65V88g19/banner1.png"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
